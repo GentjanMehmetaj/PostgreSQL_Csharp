@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PostgreSQL",
+    "\\PostgreSQL\\bin",
+    "\\PostgreSQL\\obj",
+    "\\PostgreSQL\\obj\\Release"
   ],
+  "SelectedNode": "\\PostgreSQL\\PostgreSQL.csproj",
   "PreviewInSolutionExplorer": false
 }

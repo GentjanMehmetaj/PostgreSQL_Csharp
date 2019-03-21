@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using Npgsql; 
 using System.Collections.Generic;
@@ -12,8 +13,14 @@ namespace PgSql
       public void PostgreSQL()
       {
       }
+        public void write_to_file(string data_server)
+        { 
+            string data_server;
+            StreamWriter file = new StreamWriter(@"C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\bin\Debug\file_data_server_connections.txt");
+            file.Write(data_server);
+        }
 
-      public List<string> PostgreSQLtest1()
+        public List<string> PostgreSQLtest1()
       {
          try
          {
@@ -27,6 +34,7 @@ namespace PgSql
                dataItems.Add(dataReader[0].ToString() + "   "  + dataReader[1].ToString() + "   " + dataReader[3].ToString() + "    " + dataReader[2].ToString() + "    " + dataReader[4].ToString() + "\r\n");
             }
             connection.Close();
+                write_to_file(connstring);
             return dataItems;
          }
          catch (Exception msg)
@@ -50,7 +58,8 @@ namespace PgSql
                dataItems.Add(dataReader[0].ToString() + "   " + dataReader[1].ToString() + "    " + dataReader[3].ToString() + "     " + dataReader[2].ToString() +"    " +dataReader[4].ToString()+ "\r\n");
             }
             connection.Close();
-            return dataItems;
+                write_to_file(connstring);
+                return dataItems;
          }
          catch (Exception msg)
          {

@@ -31,8 +31,9 @@ namespace PgSql
       private void button2_Click(object sender, EventArgs e)
       {
          PostGreSQL pgTest = new PostGreSQL();
-         dataItems = pgTest.PostgreSQLtest2();
+         dataItems = pgTest.PostgreSQLtest2();            
          tbDataItems.Clear();
+            
          for (int i = 0; i < dataItems.Count; i++)
          {
             tbDataItems.Text += dataItems[i];
@@ -54,7 +55,12 @@ namespace PgSql
             {
                 connection.Open();
                 dataReader = command.ExecuteReader();
-                MessageBox.Show("Saved");
+                MessageBox.Show("Data saved to the database!");
+                //Ruajtja e te dhenave te serverit ne file
+                //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
+
+                PostGreSQL data_server = new PostGreSQL();
+                data_server.write_data_to_file(connstring);
                 while(dataReader.Read())
                 {
 

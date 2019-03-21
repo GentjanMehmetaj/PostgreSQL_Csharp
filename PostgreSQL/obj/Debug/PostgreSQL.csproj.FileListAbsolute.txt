@@ -9,3 +9,14 @@ C:\Users\albana\Desktop\git\PostgreSql_and_Csharp\PostgreSQL\obj\Debug\PostgreSQ
 C:\Users\albana\Desktop\git\PostgreSql_and_Csharp\PostgreSQL\obj\Debug\PostgreSQL.csproj.CopyComplete
 C:\Users\albana\Desktop\git\PostgreSql_and_Csharp\PostgreSQL\obj\Debug\PostgreSQL.exe
 C:\Users\albana\Desktop\git\PostgreSql_and_Csharp\PostgreSQL\obj\Debug\PostgreSQL.pdb
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\bin\Debug\PostgreSQL.exe.config
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\bin\Debug\PostgreSQL.exe
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\bin\Debug\PostgreSQL.pdb
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PostgreSQL.csprojAssemblyReference.cache
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PgSql.Form1.resources
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PostgreSQL.Properties.Resources.resources
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PostgreSQL.csproj.GenerateResource.cache
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PostgreSQL.csproj.CoreCompileInputs.cache
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PostgreSQL.csproj.CopyComplete
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PostgreSQL.exe
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PostgreSQL.pdb

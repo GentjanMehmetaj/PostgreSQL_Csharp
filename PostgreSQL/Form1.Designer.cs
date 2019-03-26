@@ -45,6 +45,11 @@
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
+            this.textBox_path = new System.Windows.Forms.TextBox();
+            this.textBox_sheet = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -191,7 +196,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(518, 71);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(362, 313);
+            this.dataGridView1.Size = new System.Drawing.Size(420, 313);
             this.dataGridView1.TabIndex = 14;
             // 
             // button5
@@ -204,12 +209,60 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // textBox_path
+            // 
+            this.textBox_path.Location = new System.Drawing.Point(620, 403);
+            this.textBox_path.Name = "textBox_path";
+            this.textBox_path.Size = new System.Drawing.Size(272, 20);
+            this.textBox_path.TabIndex = 16;
+            // 
+            // textBox_sheet
+            // 
+            this.textBox_sheet.Location = new System.Drawing.Point(620, 433);
+            this.textBox_sheet.Name = "textBox_sheet";
+            this.textBox_sheet.Size = new System.Drawing.Size(272, 20);
+            this.textBox_sheet.TabIndex = 17;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(518, 400);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 18;
+            this.button6.Text = "Choose File";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(518, 459);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(420, 27);
+            this.button7.TabIndex = 19;
+            this.button7.Text = "Load File to  GridView";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(515, 436);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Write Sheet Name";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(882, 508);
+            this.ClientSize = new System.Drawing.Size(959, 508);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.textBox_sheet);
+            this.Controls.Add(this.textBox_path);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button4);
@@ -255,6 +308,11 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox_path;
+        private System.Windows.Forms.TextBox textBox_sheet;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label6;
     }
 }
 

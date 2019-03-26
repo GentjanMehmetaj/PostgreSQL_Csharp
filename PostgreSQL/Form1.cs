@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-
 using _excel = Microsoft.Office.Interop.Excel;
 using Npgsql;
 using System.Data;
+using System.Data.OleDb;//nese duam te importojme data nga excel to gridview
 
 namespace PgSql
 {
@@ -133,6 +133,29 @@ namespace PgSql
                 MessageBox.Show(msg.Message);
 
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openfiledialog1 = new OpenFileDialog();
+            openfiledialog1.Filter = "Excel File | *.xlsx; *.xls; *.xlsm;";
+            if(openfiledialog1.ShowDialog()== System.Windows.Forms.DialogResult.OK)
+            {
+                this.textBox_path.Text = openfiledialog1.FileName;
+
+            }
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string pathconn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + textBox_path.Text + ";Extended Properties=\"Excel 12.0; HDR=YES;\" ; ";
+            OleDbConnection conn = new OleDbConnection(pathconn);
+            OleDbDataAdapter mydataadapter = new OleDbDataAdapter("Select * from [" + textBox_sheet.Text + "$]", conn);
+            DataTable dt = new DataTable();
+            mydataadapter.Fill(dt);
+            dataGridView1.DataSource = dt;
+
         }
     }
 }

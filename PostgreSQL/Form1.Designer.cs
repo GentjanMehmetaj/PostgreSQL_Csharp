@@ -50,6 +50,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -183,7 +184,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(745, 12);
+            this.button4.Location = new System.Drawing.Point(684, 12);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(135, 44);
             this.button4.TabIndex = 13;
@@ -252,12 +253,23 @@
             this.label6.TabIndex = 20;
             this.label6.Text = "Write Sheet Name";
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(825, 12);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(113, 44);
+            this.button8.TabIndex = 21;
+            this.button8.Text = "Export to Database";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(959, 508);
+            this.ClientSize = new System.Drawing.Size(979, 508);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
@@ -313,6 +325,7 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button8;
     }
 }
 

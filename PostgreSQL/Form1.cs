@@ -157,5 +157,39 @@ namespace PgSql
             dataGridView1.DataSource = dt;
 
         }
+        // update table in database from gridview
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+            string connstring = "Server=127.0.0.1; Port=5432; User Id=postgres; " +
+                "Password=b2b4cc1b2; Database=DataStudent;";
+            NpgsqlConnection connection = new NpgsqlConnection(connstring);
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+                string Query = "insert into public.student (id,first_name,last_name,meadle_name,studying) values('" + dataGridView1.Rows[i].Cells[0].Value + "','" + dataGridView1.Rows[i].Cells[1].Value + "','" + dataGridView1.Rows[i].Cells[2].Value + "','" + dataGridView1.Rows[i].Cells[3].Value + "','" + dataGridView1.Rows[i].Cells[4].Value + "');";
+
+                NpgsqlCommand command = new NpgsqlCommand(Query, connection);
+            
+                NpgsqlDataReader dataReader;
+                    try
+                {
+                    connection.Open();
+                    dataReader = command.ExecuteReader();
+                   
+                    connection.Close();
+                    while (dataReader.Read())
+                    {
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+           // dataGridView1.Rows.Clear();
+            MessageBox.Show("Data saved to the database!");
+           
+        }
     }
 }

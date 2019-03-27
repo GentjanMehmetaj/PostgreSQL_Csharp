@@ -58,6 +58,9 @@ namespace PgSql
                 connection.Open();
                 dataReader = command.ExecuteReader();
                 MessageBox.Show("Data saved to the database!");
+                //fshirja e fushave pasi behet update ne database
+                id_txt.Clear();firstname_txt.Clear();meadlename_txt.Clear();
+                secondname_txt.Clear();studying_txt.Clear();
                 //Ruajtja e te dhenave te serverit ne file
                 //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
 
@@ -75,26 +78,26 @@ namespace PgSql
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {    // creating Excel Application  
+        {    // Krijimi i Excel Application  
             _excel._Application app = new _excel.Application();
-            // creating new WorkBook within Excel application  
+            // krijimi i new WorkBook Ne Excel application  
             _excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
-            // creating new Excelsheet in workbook  
+            // krijimi i  new Excelsheet in workbook  
             _excel._Worksheet worksheet = null;
-            // see the excel sheet behind the program  
+            // Shfaqja e excel sheet Sapo te ekzekutohet programi 
             app.Visible = true;
             // get the reference of first sheet. By default its name is Sheet1.  
             // store its reference to worksheet  
             worksheet = workbook.Sheets["Sheet1"];
             worksheet = workbook.ActiveSheet;
-            // changing the name of active sheet  
+            // Ndryshimi i emrit te active sheet  
             worksheet.Name = "Exported from gridview";
-            // storing header part in Excel  
+            // Ruajtja e header part in Excel  
             for (int i = 1; i < dataGridView1.Columns.Count + 1; i++)
             {
                 worksheet.Cells[1, i] = dataGridView1.Columns[i - 1].HeaderText;
             }
-            // storing Each row and column value to excel sheet  
+            // ruajtja e cdo rreshti dhe kolone (value) ne excel sheet  
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
                 for (int j = 0; j < dataGridView1.Columns.Count; j++)
@@ -106,6 +109,8 @@ namespace PgSql
             workbook.SaveAs(@"C:\Users\albana\Desktop\output.xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, _excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
             // Exit from the application  
             app.Quit();
+            dataGridView1.DataSource = null;
+            dataGridView1.Refresh();
 
         }
 
@@ -190,7 +195,9 @@ namespace PgSql
             }
            // dataGridView1.Rows.Clear();
             MessageBox.Show("Data saved to the database!");
-           
+            dataGridView1.DataSource = null;
+            dataGridView1.Refresh();
+
         }
 
         private void button9_Click(object sender, EventArgs e)

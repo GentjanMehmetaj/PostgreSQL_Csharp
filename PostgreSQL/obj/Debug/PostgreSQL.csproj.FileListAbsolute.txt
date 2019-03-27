@@ -32,3 +32,4 @@ C:\Users\albana\Desktop\git\PostgreSQL_Csharp3\PostgreSQL\obj\Debug\PostgreSQL.c
 C:\Users\albana\Desktop\git\PostgreSQL_Csharp3\PostgreSQL\obj\Debug\PostgreSQL.exe
 C:\Users\albana\Desktop\git\PostgreSQL_Csharp3\PostgreSQL\obj\Debug\PostgreSQL.pdb
 C:\Users\albana\Desktop\git\PostgreSQL_Csharp3\PostgreSQL\obj\Debug\PostgreSQL.csproj.ResolveComReference.cache
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PostgreSQL.csproj.ResolveComReference.cache

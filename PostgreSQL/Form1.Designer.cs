@@ -185,49 +185,49 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(684, 12);
+            this.button4.Location = new System.Drawing.Point(730, 12);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(135, 44);
             this.button4.TabIndex = 13;
-            this.button4.Text = "Export to fileExcel";
+            this.button4.Text = "Save data to File Excel";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(518, 71);
+            this.dataGridView1.Location = new System.Drawing.Point(564, 71);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(420, 313);
+            this.dataGridView1.Size = new System.Drawing.Size(558, 313);
             this.dataGridView1.TabIndex = 14;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(518, 12);
+            this.button5.Location = new System.Drawing.Point(564, 12);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(160, 44);
             this.button5.TabIndex = 15;
-            this.button5.Text = "Export from DB to Grid View";
+            this.button5.Text = "Import From Data Base and Show";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // textBox_path
             // 
-            this.textBox_path.Location = new System.Drawing.Point(620, 403);
+            this.textBox_path.Location = new System.Drawing.Point(666, 403);
             this.textBox_path.Name = "textBox_path";
             this.textBox_path.Size = new System.Drawing.Size(272, 20);
             this.textBox_path.TabIndex = 16;
             // 
             // textBox_sheet
             // 
-            this.textBox_sheet.Location = new System.Drawing.Point(620, 433);
+            this.textBox_sheet.Location = new System.Drawing.Point(666, 433);
             this.textBox_sheet.Name = "textBox_sheet";
             this.textBox_sheet.Size = new System.Drawing.Size(272, 20);
             this.textBox_sheet.TabIndex = 17;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(518, 400);
+            this.button6.Location = new System.Drawing.Point(564, 400);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 18;
@@ -237,18 +237,18 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(518, 459);
+            this.button7.Location = new System.Drawing.Point(564, 459);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(420, 27);
             this.button7.TabIndex = 19;
-            this.button7.Text = "Load File to  GridView";
+            this.button7.Text = "Load File to the  GridView";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(515, 436);
+            this.label6.Location = new System.Drawing.Point(561, 436);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 13);
             this.label6.TabIndex = 20;
@@ -256,11 +256,11 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(825, 12);
+            this.button8.Location = new System.Drawing.Point(871, 12);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(113, 44);
             this.button8.TabIndex = 21;
-            this.button8.Text = "Export to Database";
+            this.button8.Text = "Update DataBase";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -279,7 +279,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(979, 508);
+            this.ClientSize = new System.Drawing.Size(1134, 508);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.label6);

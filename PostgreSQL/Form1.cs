@@ -6,6 +6,7 @@ using Npgsql;
 using System.Data;
 using System.Data.OleDb;//nese duam te importojme data nga excel to gridview
 using System.IO;
+using System.Drawing;
 
 namespace PgSql
 {
@@ -17,8 +18,47 @@ namespace PgSql
       {
          InitializeComponent();
       }
+        //public struct ValidFileCheck
+        //{
+        //    public bool ValidFile;
+        //    public int row;
+        //}
+        //perpara se te dhenat te dergohen ne database shikojme nese File permban te dhena te sakta. funksioni me poshte.
+        public bool Validate_File()
+        {
+            // ValidFileCheck vlfchek = new ValidFileCheck();
+            //  vlfchek.row = 0;
+            bool Value = false;
+            int row_check = 0;
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+            {
+               
+                if (dataGridView1.Rows[i].Cells[0].Value.ToString() != "" && dataGridView1.Rows[i].Cells[1].Value.ToString() != "" && dataGridView1.Rows[i].Cells[2].Value.ToString() != "" && dataGridView1.Rows[i].Cells[3].Value.ToString() != "" && dataGridView1.Rows[i].Cells[4].Value.ToString() != "")
+                {
+                    row_check += 1;
+                }
+                else
+                {
+                   // vlfchek.row = row_check + 1;
+                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                }
 
-      private void button1_Click(object sender, EventArgs e)
+               if (row_check == (dataGridView1.Rows.Count-1))
+                {
+                    // vlfchek.ValidFile = true;
+                    Value = true;
+                }
+                else
+                {
+                    // vlfchek.ValidFile = false;
+                    Value = false;
+                  
+                }
+            }
+            return Value;//return true/or false ne varsi te te dhenave ne file te shfaqura ne gridview.
+        }
+
+                private void button1_Click(object sender, EventArgs e)
       {
          PostGreSQL pgTest = new PostGreSQL();
          dataItems = pgTest.PostgreSQLtest1();
@@ -48,32 +88,38 @@ namespace PgSql
             string connstring = "Server=127.0.0.1; Port=5432; User Id=postgres; " +
                 "Password=b2b4cc1b2; Database=DataStudent;";
             NpgsqlConnection connection = new NpgsqlConnection(connstring);
-            
-            string Query= "insert into public.student (id,first_name,last_name,meadle_name,studying) values('"+ this.id_txt.Text+"','"+this.firstname_txt.Text+"','"+this.secondname_txt.Text+"','"+this.meadlename_txt.Text+"','"+this.studying_txt.Text+"');";
-
-            NpgsqlCommand command = new NpgsqlCommand(Query, connection);
-            NpgsqlDataReader dataReader;
-            try
+            if (id_txt.Text != "" && firstname_txt.Text != "" && meadlename_txt.Text != "" && secondname_txt.Text != "" && studying_txt.Text != "")
             {
-                connection.Open();
-                dataReader = command.ExecuteReader();
-                MessageBox.Show("Data saved to the database!");
-                //fshirja e fushave pasi behet update ne database
-                id_txt.Clear();firstname_txt.Clear();meadlename_txt.Clear();
-                secondname_txt.Clear();studying_txt.Clear();
-                //Ruajtja e te dhenave te serverit ne file
-                //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
+                string Query = "insert into public.student (id,first_name,last_name,meadle_name,studying) values('" + this.id_txt.Text + "','" + this.firstname_txt.Text + "','" + this.secondname_txt.Text + "','" + this.meadlename_txt.Text + "','" + this.studying_txt.Text + "');";
 
-                PostGreSQL data_server = new PostGreSQL();
-                data_server.write_data_to_file(connstring);
-                while(dataReader.Read())
+                NpgsqlCommand command = new NpgsqlCommand(Query, connection);
+                NpgsqlDataReader dataReader;
+                try
                 {
+                    connection.Open();
+                    dataReader = command.ExecuteReader();
+                    MessageBox.Show("Data saved to the database!");
+                    //fshirja e fushave pasi behet update ne database
+                    id_txt.Clear(); firstname_txt.Clear(); meadlename_txt.Clear();
+                    secondname_txt.Clear(); studying_txt.Clear();
+                    //Ruajtja e te dhenave te serverit ne file
+                    //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
 
+                    PostGreSQL data_server = new PostGreSQL();
+                    data_server.write_data_to_file(connstring);
+                    while (dataReader.Read())
+                    {
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
-            catch(Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Please fill all the fields in order to insert the data into the database");
             }
         }
 
@@ -170,33 +216,53 @@ namespace PgSql
             string connstring = "Server=127.0.0.1; Port=5432; User Id=postgres; " +
                 "Password=b2b4cc1b2; Database=DataStudent;";
             NpgsqlConnection connection = new NpgsqlConnection(connstring);
-            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+           // ValidFileCheck result = Validate_File(); 
+            if (Validate_File())
             {
-                string Query = "insert into public.student (id,first_name,last_name,meadle_name,studying) values('" + dataGridView1.Rows[i].Cells[0].Value + "','" + dataGridView1.Rows[i].Cells[1].Value + "','" + dataGridView1.Rows[i].Cells[2].Value + "','" + dataGridView1.Rows[i].Cells[3].Value + "','" + dataGridView1.Rows[i].Cells[4].Value + "');";
-
-                NpgsqlCommand command = new NpgsqlCommand(Query, connection);
-            
-                NpgsqlDataReader dataReader;
-                    try
+                for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
                 {
-                    connection.Open();
-                    dataReader = command.ExecuteReader();
-                   
-                    connection.Close();
-                    while (dataReader.Read())
-                    {
+                   // if (dataGridView1.Rows[i].Cells[0].Value.ToString() != "" && dataGridView1.Rows[i].Cells[1].Value.ToString() != "" && dataGridView1.Rows[i].Cells[2].Value.ToString() != "" && dataGridView1.Rows[i].Cells[3].Value.ToString() != "" && dataGridView1.Rows[i].Cells[4].Value.ToString() != "")
+                   //{
+                        string Query = "insert into public.student (id,first_name,last_name,meadle_name,studying) values('" + dataGridView1.Rows[i].Cells[0].Value + "','" + dataGridView1.Rows[i].Cells[1].Value + "','" + dataGridView1.Rows[i].Cells[2].Value + "','" + dataGridView1.Rows[i].Cells[3].Value + "','" + dataGridView1.Rows[i].Cells[4].Value + "');";
 
-                    }
+                        NpgsqlCommand command = new NpgsqlCommand(Query, connection);
+
+                        NpgsqlDataReader dataReader;
+                        try
+                        {
+                            connection.Open();
+                            dataReader = command.ExecuteReader();
+
+                            connection.Close();
+                            while (dataReader.Read())
+                            {
+
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("In the row " + (i + 1).ToString() + " you have empty cell and the data can't insert to the data base");
+                    //}
+
+                  //  break;
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                MessageBox.Show("Data saved to the database!");
+                dataGridView1.DataSource = null;
+                dataGridView1.Refresh();
             }
-           // dataGridView1.Rows.Clear();
-            MessageBox.Show("Data saved to the database!");
-            dataGridView1.DataSource = null;
-            dataGridView1.Refresh();
+            else
+            {
+                MessageBox.Show("In the RED line to the DataGridView you have empty cell and the data can't insert to the data base");
+
+
+            }
+
 
         }
 

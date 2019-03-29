@@ -58,7 +58,7 @@ namespace PgSql
             return Value;//return true/or false ne varsi te te dhenave ne file te shfaqura ne gridview.
         }
 
-                private void button1_Click(object sender, EventArgs e)
+      private void button1_Click(object sender, EventArgs e)
       {
          PostGreSQL pgTest = new PostGreSQL();
          dataItems = pgTest.PostgreSQLtest1();
@@ -88,9 +88,9 @@ namespace PgSql
             string connstring = "Server=127.0.0.1; Port=5432; User Id=postgres; " +
                 "Password=b2b4cc1b2; Database=DataStudent;";
             NpgsqlConnection connection = new NpgsqlConnection(connstring);
-            if (id_txt.Text != "" && firstname_txt.Text != "" && meadlename_txt.Text != "" && secondname_txt.Text != "" && studying_txt.Text != "")
+            if (firstname_txt.Text != "" && meadlename_txt.Text != "" && secondname_txt.Text != "" && studying_txt.Text != "")
             {
-                string Query = "insert into public.student (id,first_name,last_name,meadle_name,studying) values('" + this.id_txt.Text + "','" + this.firstname_txt.Text + "','" + this.secondname_txt.Text + "','" + this.meadlename_txt.Text + "','" + this.studying_txt.Text + "');";
+                string Query = "insert into public.student (first_name,last_name,meadle_name,studying) values('" + this.firstname_txt.Text + "','" + this.secondname_txt.Text + "','" + this.meadlename_txt.Text + "','" + this.studying_txt.Text + "');";
 
                 NpgsqlCommand command = new NpgsqlCommand(Query, connection);
                 NpgsqlDataReader dataReader;
@@ -100,7 +100,7 @@ namespace PgSql
                     dataReader = command.ExecuteReader();
                     MessageBox.Show("Data saved to the database!");
                     //fshirja e fushave pasi behet update ne database
-                    id_txt.Clear(); firstname_txt.Clear(); meadlename_txt.Clear();
+                     firstname_txt.Clear(); meadlename_txt.Clear();
                     secondname_txt.Clear(); studying_txt.Clear();
                     //Ruajtja e te dhenave te serverit ne file
                     //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
@@ -223,7 +223,7 @@ namespace PgSql
                 {
                    // if (dataGridView1.Rows[i].Cells[0].Value.ToString() != "" && dataGridView1.Rows[i].Cells[1].Value.ToString() != "" && dataGridView1.Rows[i].Cells[2].Value.ToString() != "" && dataGridView1.Rows[i].Cells[3].Value.ToString() != "" && dataGridView1.Rows[i].Cells[4].Value.ToString() != "")
                    //{
-                        string Query = "insert into public.student (id,first_name,last_name,meadle_name,studying) values('" + dataGridView1.Rows[i].Cells[0].Value + "','" + dataGridView1.Rows[i].Cells[1].Value + "','" + dataGridView1.Rows[i].Cells[2].Value + "','" + dataGridView1.Rows[i].Cells[3].Value + "','" + dataGridView1.Rows[i].Cells[4].Value + "');";
+                        string Query = "insert into public.student (first_name,last_name,meadle_name,studying) values('" + dataGridView1.Rows[i].Cells[0].Value + "','" + dataGridView1.Rows[i].Cells[1].Value + "','" + dataGridView1.Rows[i].Cells[2].Value + "','" + dataGridView1.Rows[i].Cells[3].Value + "');";
 
                         NpgsqlCommand command = new NpgsqlCommand(Query, connection);
 
@@ -281,7 +281,7 @@ namespace PgSql
                 for (int i = 0; dataReader.Read(); i++)
                 {
                     StreamWriter file = new StreamWriter("database_exported.txt",true);
-                    file.Write(dataReader[0].ToString() + "   " + dataReader[1].ToString() + "   " + dataReader[3].ToString() + "    " + dataReader[2].ToString() + "    " + dataReader[4].ToString() + "\r\n");
+                    file.Write(dataReader[4].ToString() + "   " + dataReader[0].ToString() + "   " + dataReader[2].ToString() + "    " + dataReader[1].ToString() + "    " + dataReader[3].ToString() + "\r\n");
                     file.Close();
 
                 }
@@ -293,6 +293,34 @@ namespace PgSql
                 MessageBox.Show(msg.ToString());
                 throw;
             }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //string connstring = "Server=127.0.0.1; Port=5432; User Id=postgres; " +
+            //  "Password=b2b4cc1b2; Database=DataStudent;";
+            //NpgsqlConnection connection = new NpgsqlConnection(connstring);
+            //string Query = "alter table public.student add column id serial primary key;";
+
+            //NpgsqlCommand command = new NpgsqlCommand(Query, connection);
+            //NpgsqlDataReader dataReader;
+            //try
+            //{
+            //    connection.Open();
+            //    dataReader = command.ExecuteReader();
+
+            //    connection.Close();
+            //    while (dataReader.Read())
+            //    {
+
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+             MessageBox.Show("You must insert code and after that  you can make tests!");
+          
         }
     }
 }

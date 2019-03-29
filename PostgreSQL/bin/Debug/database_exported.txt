@@ -1,0 +1,5 @@
+1   Gentjan   Zenel    Mehmetaj    Informatike
+2   Albana   Fadil    Sufaj    Informatike
+3   Mirsada   Agim    Kukaj    Filozofi
+4   Silvana   Zenel    Mehmetaj    Robotike
+5   Albert   H...    Ainstain    Fizike

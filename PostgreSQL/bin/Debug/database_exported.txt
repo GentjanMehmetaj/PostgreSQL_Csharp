@@ -1,8 +1,3 @@
-1   Gentjan   Zenel    Mehmetaj    Informatike
-2   Albana   Fadil    Sufaj    Informatike
-3   Mirsada   Agim    Kukaj    Filozofi
-4   Silvana   Zenel    Mehmetaj    Robotike
-5   Albert   H...    Ainstain    Fizike
 Keidi   Mehmetaj   Robotike    Elion    11
 Erich   Remark   Writer    Maria    14
 sila   Mehmetaj   Robotike    Zenel    8
@@ -10,7 +5,6 @@ Mirsad   Kukaj   Filozofi    Agim    3
 Albana   Sufaj   Informatike    Fadil    2
 arben   Sufaj   Biologji    Fadil    9
 fizike   Ainstain   Fizike    H...    5
-gentjan   mehmetaj   info    zenel    1
 Franc   kafka   Filozof,Writer    H…    15
 silva   Mehmetaj   Robotike    Zenel    4
    Sufaj   Informatike    Fadil    6
@@ -22,3 +16,4 @@ Mirsad   Kukaj   Filozofi    Agim    16
 Albana   Sufaj   Informatike    Fadil    17
 arben   Sufaj   Biologji    Fadil    18
 Orhan   Pamuk   Writer    H....    19
+gentiani   mehmetaj   info    zenel    1

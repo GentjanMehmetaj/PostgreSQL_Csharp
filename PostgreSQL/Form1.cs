@@ -25,6 +25,8 @@ namespace PgSql
         private string NOvalueChange, valueChange;
         private bool data_load_from_excel_file = false;
        private bool file_excel_formated_ok = false;
+        private bool dt_put_user = true;
+        private int row_selected;
         private int excelcopy = 0;
         
 
@@ -217,33 +219,41 @@ namespace PgSql
                 connection = new NpgsqlConnection(connstring);
                 if (firstname_txt.Text != "" && meadlename_txt.Text != "" && secondname_txt.Text != "" && studying_txt.Text != "")
                 {
-                    string Query = "insert into public.student (first_name,last_name,meadle_name,studying) values('" + this.firstname_txt.Text + "','" + this.secondname_txt.Text + "','" + this.meadlename_txt.Text + "','" + this.studying_txt.Text + "');";
-
-                     command = new NpgsqlCommand(Query, connection);
-                   // NpgsqlDataReader dataReader;
-                    try
+                    if (dt_put_user == true)
                     {
-                        connection.Open();
-                        dataReader = command.ExecuteReader();
-                        MessageBox.Show("Data saved to the database!");
-                        //fshirja e fushave pasi behet update ne database
-                        firstname_txt.Clear(); meadlename_txt.Clear();
-                        secondname_txt.Clear(); studying_txt.Clear();
-                        
-                        //Ruajtja e te dhenave te serverit ne file
-                        //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
-                        // PostGreSQL data_server = new PostGreSQL();
-                       // data_server.write_data_to_file(connstring);
+                        string Query = "insert into public.student (first_name,last_name,meadle_name,studying) values('" + this.firstname_txt.Text + "','" + this.secondname_txt.Text + "','" + this.meadlename_txt.Text + "','" + this.studying_txt.Text + "');";
 
-                        while (dataReader.Read())
+                        command = new NpgsqlCommand(Query, connection);
+                        // NpgsqlDataReader dataReader;
+                        try
                         {
+                            connection.Open();
+                            dataReader = command.ExecuteReader();
+                            MessageBox.Show("Data saved to the database!");
+                            //fshirja e fushave pasi behet update ne database
+                            firstname_txt.Clear(); meadlename_txt.Clear();
+                            secondname_txt.Clear(); studying_txt.Clear();
+                            id_text.Clear();
 
+                            //Ruajtja e te dhenave te serverit ne file
+                            //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
+                            // PostGreSQL data_server = new PostGreSQL();
+                            // data_server.write_data_to_file(connstring);
+
+                            while (dataReader.Read())
+                            {
+
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
+                            // MessageBox.Show(ex.Message);
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
-                       // MessageBox.Show(ex.Message);
+                        MessageBox.Show("This data can,t bee add to the database becouse are not put from the user by writing them! Are came from Gridview...");
                     }
                 }
                 else
@@ -554,38 +564,61 @@ namespace PgSql
             {
                 connection = new NpgsqlConnection(connstring);
                 if (firstname_txt.Text != "" && meadlename_txt.Text != "" && secondname_txt.Text != "" && studying_txt.Text != "")
-                {
-                 //   string Query = "update public.student set first_name,last_name,meadle_name,studying '" + this.firstname_txt.Text + "','" + this.secondname_txt.Text + "','" + this.meadlename_txt.Text + "','" + this.studying_txt.Text + "') where id='"+ Convert.ToInt32(this.id_text.Text.ToString())+"';";
-                      //string Query = "insert into public.student (first_name,last_name,meadle_name,studying) values('"  "','" + this.secondname_txt.Text + "','" + this.meadlename_txt.Text + "','" + this.studying_txt.Text + "');";
+                {//string Str = textBox1.Text.Trim();
+                    //double Num;
+                    //bool isNum = double.TryParse(Str, out Num);
+                    //if (isNum)
+                    //MessageBox.Show(Num.ToString());
+                    double i = 0;
+                    if (!double.TryParse(firstname_txt.Text, out i)&& !double.TryParse(meadlename_txt.Text, out i)&& !double.TryParse(secondname_txt.Text, out i)&& !double.TryParse(studying_txt.Text, out i))
+                    {
+
+                    //if (firstname_txt.Text.ToString() != dataGridView1.Rows[row_selected].Cells[0].Value.ToString() && meadlename_txt.Text.ToString() != dataGridView1.Rows[row_selected].Cells[1].Value.ToString() && secondname_txt.Text.ToString() != dataGridView1.Rows[row_selected].Cells[2].Value.ToString() && studying_txt.Text.ToString() != dataGridView1.Rows[row_selected].Cells[3].Value.ToString())
+                    //{
+                    //    //string tb = firstname_txt.Text.ToString(); string tg = dataGridView1.Rows[row_selected].Cells[0].Value.ToString();
+                    //int i = 0;
+                    //   string Query = "update public.student set first_name,last_name,meadle_name,studying '" + this.firstname_txt.Text + "','" + this.secondname_txt.Text + "','" + this.meadlename_txt.Text + "','" + this.studying_txt.Text + "') where id='"+ Convert.ToInt32(this.id_text.Text.ToString())+"';";
+                    //string Query = "insert into public.student (first_name,last_name,meadle_name,studying) values('"  "','" + this.secondname_txt.Text + "','" + this.meadlename_txt.Text + "','" + this.studying_txt.Text + "');";
                     string Query = "update public.student set first_name='" + this.firstname_txt.Text + "',last_name='" + this.secondname_txt.Text + "',meadle_name='" + this.meadlename_txt.Text + "',studying='" + this.studying_txt.Text + "'where id = '" + Convert.ToInt32(this.id_text.Text.ToString()) + "';";
-                    command = new NpgsqlCommand(Query, connection);
-                    // NpgsqlDataReader dataReader;
-                    try
-                    {
-                        connection.Open();
-                        dataReader = command.ExecuteReader();
-                        MessageBox.Show("Data saved to the database!");
-                        //fshirja e fushave pasi behet update ne database
-                        firstname_txt.Clear(); meadlename_txt.Clear();
-                        secondname_txt.Clear(); studying_txt.Clear();
-
-                        //Ruajtja e te dhenave te serverit ne file
-                        //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
-                        // PostGreSQL data_server = new PostGreSQL();
-                        // data_server.write_data_to_file(connstring);
-
-                        while (dataReader.Read())
+                        command = new NpgsqlCommand(Query, connection);
+                        // NpgsqlDataReader dataReader;
+                        try
                         {
+                            connection.Open();
+                            dataReader = command.ExecuteReader();
+                            MessageBox.Show("Data saved to the database!");
+                            //fshirja e fushave pasi behet update ne database
+                            firstname_txt.Clear(); meadlename_txt.Clear();
+                            secondname_txt.Clear(); studying_txt.Clear();
+                            id_text.Clear();
 
+                            //Ruajtja e te dhenave te serverit ne file
+                            //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
+                            // PostGreSQL data_server = new PostGreSQL();
+                            // data_server.write_data_to_file(connstring);
+
+                            while (dataReader.Read())
+                            {
+
+                            }
                         }
+                        catch (Exception ex)
+                        {
+                            // MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
+                            MessageBox.Show(ex.Message);
+                        }
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show("Nothing to update! None of the values came from gridview has changed");
                     }
-                    catch (Exception ex)
-                    {
-                       // MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
-                         MessageBox.Show(ex.Message);
-                    }
+                    else { MessageBox.Show("You enter a number! please write a string name!");}
+                    //}
+                    //}
+                    //else { MessageBox.Show("is number"); }
                 }
-                else
+
+                    else
                 {
                     MessageBox.Show("Please fill all the fields in order to insert the data into the database");
                 }
@@ -760,7 +793,7 @@ namespace PgSql
 
         //nese nuk ndodh ndryshimi ne cell
         private void cellclick(object sender, DataGridViewCellEventArgs e)
-        { int i = e.RowIndex;
+        {   row_selected = e.RowIndex;
             dataGridView1.Columns[4].ReadOnly = true;
             if (e.ColumnIndex == 4)
             {
@@ -773,12 +806,13 @@ namespace PgSql
             }//zgjedhja e nje rreshti ne datagrid view ne rast se duam te bejme update te ndonjeres nga fushat
             else if (e.ColumnIndex<0&&e.RowIndex>=0)
             {
-                DataGridViewRow rowselected = dataGridView1.Rows[i];
+                DataGridViewRow rowselected = dataGridView1.Rows[row_selected];
                 firstname_txt.Text = rowselected.Cells[0].Value.ToString();
                 secondname_txt.Text = rowselected.Cells[1].Value.ToString();
                 meadlename_txt.Text = rowselected.Cells[2].Value.ToString();
                 studying_txt.Text = rowselected.Cells[3].Value.ToString();
                 id_text.Text= rowselected.Cells[4].Value.ToString();
+                dt_put_user = false;
             }
         }
     }

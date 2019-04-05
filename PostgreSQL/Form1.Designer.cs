@@ -251,7 +251,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(164, 171);
+            this.button9.Location = new System.Drawing.Point(295, 165);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(194, 34);
             this.button9.TabIndex = 22;
@@ -261,11 +261,11 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(12, 171);
+            this.button10.Location = new System.Drawing.Point(12, 165);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(121, 23);
+            this.button10.Size = new System.Drawing.Size(220, 29);
             this.button10.TabIndex = 23;
-            this.button10.Text = "buton for test Qeuery";
+            this.button10.Text = "Update slected row in grid view";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 

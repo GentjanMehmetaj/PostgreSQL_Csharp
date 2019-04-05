@@ -22,10 +22,11 @@ namespace PgSql
         private NpgsqlCommand command;
         private NpgsqlDataReader dataReader;
 
-        private string NOvalueChange, valueChange,valuetemp, valuetemp1;
+        private string NOvalueChange, valueChange;
         private bool data_load_from_excel_file = false;
        private bool file_excel_formated_ok = false;
         private int excelcopy = 0;
+        
 
 
 
@@ -141,8 +142,9 @@ namespace PgSql
                 }
                 catch (Exception msg)
                 {
-                    MessageBox.Show(msg.ToString());
-                    throw;
+                    MessageBox.Show("You can't connect with database!Please chek data connections saved in the file and try again");
+                    //MessageBox.Show(msg.ToString());
+                    //throw;
                 }
             }
             else
@@ -163,7 +165,7 @@ namespace PgSql
       private void button2_Click(object sender, EventArgs e)
         {
                
-                DtServer = pg_Connect.connect_database();
+            DtServer = pg_Connect.connect_database();
             string connstring = DtServer.dt_connection;
             bool conn_True = DtServer.fileExist;
 
@@ -187,8 +189,9 @@ namespace PgSql
                 }
                 catch (Exception msg)
                 {
-                    MessageBox.Show(msg.ToString());
-                    throw;
+                    MessageBox.Show("You can't connect with database! Please chek data connections saved in the file and try again");
+                    //MessageBox.Show(msg.ToString());
+                    //throw;
                 }
             }
                   
@@ -239,7 +242,8 @@ namespace PgSql
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
+                       // MessageBox.Show(ex.Message);
                     }
                 }
                 else
@@ -346,13 +350,10 @@ namespace PgSql
             {
                
                 connection = new NpgsqlConnection(connstring);
-               command = new NpgsqlCommand("SELECT * from public.student", connection);
-               
                 try
                 {
-
-                    NpgsqlDataAdapter NpgsqlDA = new NpgsqlDataAdapter();
-
+                    command = new NpgsqlCommand("SELECT * from public.student", connection);
+                   NpgsqlDataAdapter NpgsqlDA = new NpgsqlDataAdapter();
                     NpgsqlDA.SelectCommand = command;
                     DataTable dbdataset = new DataTable();
                     NpgsqlDA.Fill(dbdataset);
@@ -366,7 +367,8 @@ namespace PgSql
                 }
                 catch (Exception msg)
                 {
-                    MessageBox.Show(msg.Message);
+                    MessageBox.Show("You can't connect with database!Please chek data connections saved in the file and try again");
+                    // MessageBox.Show(msg.Message);
 
                 }
             }
@@ -428,9 +430,10 @@ namespace PgSql
                     if (data_load_from_excel_file == true)
                     {
                         connection = new NpgsqlConnection(connstring);
-                        // ValidFileCheck result = Validate_File(); 
+                        // ValidFileCheck result = Validate_File(); ketu fillon
                         if (Validate_File())
                         {
+                            bool dt_saved_ok = true;
                             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
                             {
                                 // if (dataGridView1.Rows[i].Cells[0].Value.ToString() != "" && dataGridView1.Rows[i].Cells[1].Value.ToString() != "" && dataGridView1.Rows[i].Cells[2].Value.ToString() != "" && dataGridView1.Rows[i].Cells[3].Value.ToString() != "" && dataGridView1.Rows[i].Cells[4].Value.ToString() != "")
@@ -454,20 +457,19 @@ namespace PgSql
                                 }
                                 catch (Exception ex)
                                 {
-                                    MessageBox.Show(ex.Message);
+                                    MessageBox.Show("You can't connect with database and for this reason you can not save this data!Please chek data connections saved in the file and try again");
+                                    dt_saved_ok = false;
+                                   // MessageBox.Show(ex.Message);
                                 }
 
-                                //}
-                                //else
-                                //{
-                                //    MessageBox.Show("In the row " + (i + 1).ToString() + " you have empty cell and the data can't insert to the data base");
-                                //}
-
-                                //  break;
+                                
                             }
-                            MessageBox.Show("Data saved to the database!");
-                            dataGridView1.DataSource = null;
-                            dataGridView1.Refresh();
+                            if (dt_saved_ok)
+                            {
+                                MessageBox.Show("Data saved to the database!");
+                                dataGridView1.DataSource = null;
+                                dataGridView1.Refresh();
+                            }
                         }
                         else
                         {
@@ -480,6 +482,11 @@ namespace PgSql
                                 MessageBox.Show("As you can see in the gridview : Sheet File Excel that you select has wrong Data");
                             }
                         }
+                        // catch (Exception ex)
+                        //{
+                        //    MessageBox.Show(ex.Message);
+                        //}
+                        //ketu mbaron
                     }
                     else
                     {
@@ -509,10 +516,11 @@ namespace PgSql
             if (conn_True)
             {
                 connection = new NpgsqlConnection(connstring);
-                connection.Open();
-               command = new NpgsqlCommand("SELECT * FROM public.student", connection);
                 try
                 {
+                    connection.Open();
+                     command = new NpgsqlCommand("SELECT * FROM public.student", connection);
+               
                      dataReader = command.ExecuteReader();
                     for (int i = 0; dataReader.Read(); i++)
                     {
@@ -526,8 +534,9 @@ namespace PgSql
                 }
                 catch (Exception msg)
                 {
-                    MessageBox.Show(msg.ToString());
-                    throw;
+                    MessageBox.Show("You can't connect with database and you can not save data to the text File!Please chek data connections saved in the file and try again");
+                    //MessageBox.Show(msg.ToString());
+                    //throw;
                 }
             }
             else
@@ -700,18 +709,25 @@ namespace PgSql
 
         //nese nuk ndodh ndryshimi ne cell
         private void cellclick(object sender, DataGridViewCellEventArgs e)
-        {
+        { int i = e.RowIndex;
             dataGridView1.Columns[4].ReadOnly = true;
             if (e.ColumnIndex == 4)
             {
                 MessageBox.Show("This column is read only and can not be changed!");
             }
-           else if (e.RowIndex >= 0&&e.ColumnIndex>=0)
+            else if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {//ruajtja e vleres ne momentin e cklikimit ne cell
                 NOvalueChange = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-              
+
+            }//zgjedhja e nje rreshti ne datagrid view ne rast se duam te bejme update te ndonjeres nga fushat
+            else if (e.ColumnIndex<0&&e.RowIndex>=0)
+            {
+                DataGridViewRow rowselected = dataGridView1.Rows[i];
+                firstname_txt.Text = rowselected.Cells[0].Value.ToString();
+                secondname_txt.Text = rowselected.Cells[1].Value.ToString();
+                meadlename_txt.Text = rowselected.Cells[2].Value.ToString();
+                studying_txt.Text = rowselected.Cells[3].Value.ToString();
             }
-        
         }
     }
 }

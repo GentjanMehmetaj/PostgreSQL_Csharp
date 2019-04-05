@@ -22,7 +22,7 @@ namespace PgSql
         private NpgsqlCommand command;
         private NpgsqlDataReader dataReader;
 
-        private string NOvalueChange, valueChange;
+        private string NOvalueChange, valueChange,valuetemp, valuetemp1;
         private bool data_load_from_excel_file = false;
        private bool file_excel_formated_ok = false;
         private int excelcopy = 0;
@@ -67,7 +67,7 @@ namespace PgSql
         //    return file_excel_formated_ok;
         //}
         //perpara se te dhenat te dergohen ne database shikojme nese File permban te dhena te sakta. funksioni me poshte.
-        public bool Validate_File()
+        private bool Validate_File()
         {
             // ValidFileCheck vlfchek = new ValidFileCheck();
             //  vlfchek.row = 0;
@@ -360,6 +360,7 @@ namespace PgSql
                     bsource.DataSource = dbdataset;
                     dataGridView1.DataSource = bsource;
                     NpgsqlDA.Update(dbdataset);
+                    dataGridView1.AllowUserToAddRows = false;
                     data_load_from_excel_file = false;
 
                 }
@@ -393,10 +394,24 @@ namespace PgSql
             dataGridView1.DataSource = null;
             string pathconn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + textBox_path.Text + ";Extended Properties=\"Excel 12.0; HDR=YES;\" ; ";
             OleDbConnection conn = new OleDbConnection(pathconn);
-            OleDbDataAdapter mydataadapter = new OleDbDataAdapter("Select * from [" + textBox_sheet.Text + "$]", conn);
-            DataTable dt = new DataTable();
-            mydataadapter.Fill(dt);
-            dataGridView1.DataSource = dt;
+            //foreach ( sheet in workbook.Sheets)
+            //{
+            //    if (sheet.Name.equals("sheetName"))
+            //    {
+            //        //do something
+            //    }
+            //}
+            try
+            {
+                OleDbDataAdapter mydataadapter = new OleDbDataAdapter("Select * from [" + textBox_sheet.Text + "$]", conn);
+                DataTable dt = new DataTable();
+                mydataadapter.Fill(dt);
+                dataGridView1.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Name of the sheet is incorect!Please write correct name of excel sheet like it is in your workbook!" );
+            }
             data_load_from_excel_file = true;
 
         }
@@ -536,13 +551,12 @@ namespace PgSql
 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null&&NOvalueChange!=valueChange)
+        { //vlera e cell e ndryshuar
+            valueChange = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null&&NOvalueChange!=valueChange&&data_load_from_excel_file==false)
             {
-                 valueChange = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 DialogResult result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
+                  if (result == DialogResult.Yes&&valueChange!="")
                 {
                    
                     DtServer = pg_Connect.connect_database();
@@ -550,10 +564,7 @@ namespace PgSql
                      bool conn_True = DtServer.fileExist;
 
                     if (conn_True)
-                    {   //dataGridView1.Rows.Count-2 nese jemi brenda rreshtave qe permbajne te dhenat
-                        //e nxjerra nga databasa. Ne menyre qe te bejme update
-                        if (e.RowIndex <=dataGridView1.Rows.Count-2)
-                        {
+                    {  
                             connection = new NpgsqlConnection(connstring);
                             int Column_index = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ColumnIndex.ToString());
                             int value_of_id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
@@ -561,12 +572,10 @@ namespace PgSql
                             switch (Column_index)
                             {
                                 case 0:
-                                    //update student set first_name = 'Klesti', meadle_name = 'Elion' where id = 1;
-                                    //select* from student;
+                                   
                                     string Query = "update public.student set first_name='" + valueChange + "'where id = '" + value_of_id + "';";
                                     command = new NpgsqlCommand(Query, connection);
-
-                                    // NpgsqlDataReader dataReader;
+                                
                                     try
                                     {
                                         connection.Open();
@@ -650,9 +659,6 @@ namespace PgSql
                                     }
                                     break;
                                 case 4:
-                                   // MessageBox.Show("Id value can not changed");
-                                   //valueChange = NOvalueChange;
-                                   // this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
                                     dataGridView1.Refresh();
                                     break;
                                 default:
@@ -661,14 +667,7 @@ namespace PgSql
                                     break;
 
                             }
-                        }
-                        else
-                        {
-                            MessageBox.Show("This field is not in your database and can not be UPDATE");
-                            valueChange = NOvalueChange;
-                            this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
-                            dataGridView1.Refresh();
-                        }
+                       
                         
                     }
                     else
@@ -680,8 +679,15 @@ namespace PgSql
                 }
                 else if (result == DialogResult.No)
                 {
-                    valueChange = NOvalueChange;
-                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value=NOvalueChange;
+                   //cell-it ne datagridview i jepet vlera e qe kishte perpara setetentohej modifikimi
+                   this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value=NOvalueChange;
+                    dataGridView1.Refresh();
+                }
+                else if (valueChange=="")
+                {
+                    MessageBox.Show("You can not add empty field to the database!");
+                   // valueChange = valuetemp;
+                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
                     dataGridView1.Refresh();
                 }
                
@@ -689,7 +695,10 @@ namespace PgSql
             
           
         }
-        //nese nuk ndollndryshim ne cell
+
+       
+
+        //nese nuk ndodh ndryshimi ne cell
         private void cellclick(object sender, DataGridViewCellEventArgs e)
         {
             dataGridView1.Columns[4].ReadOnly = true;
@@ -698,8 +707,9 @@ namespace PgSql
                 MessageBox.Show("This column is read only and can not be changed!");
             }
            else if (e.RowIndex >= 0&&e.ColumnIndex>=0)
-            {
+            {//ruajtja e vleres ne momentin e cklikimit ne cell
                 NOvalueChange = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+              
             }
         
         }

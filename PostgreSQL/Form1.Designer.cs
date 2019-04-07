@@ -135,6 +135,7 @@
             this.firstname_txt.Name = "firstname_txt";
             this.firstname_txt.Size = new System.Drawing.Size(142, 20);
             this.firstname_txt.TabIndex = 9;
+            this.firstname_txt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.firstname_txt_KeyPress);
             // 
             // secondname_txt
             // 
@@ -142,6 +143,7 @@
             this.secondname_txt.Name = "secondname_txt";
             this.secondname_txt.Size = new System.Drawing.Size(142, 20);
             this.secondname_txt.TabIndex = 10;
+            this.secondname_txt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.secondname_txt_KeyPress);
             // 
             // meadlename_txt
             // 
@@ -149,6 +151,7 @@
             this.meadlename_txt.Name = "meadlename_txt";
             this.meadlename_txt.Size = new System.Drawing.Size(142, 20);
             this.meadlename_txt.TabIndex = 11;
+            this.meadlename_txt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.meadlename_txt_KeyPress);
             // 
             // studying_txt
             // 
@@ -156,6 +159,7 @@
             this.studying_txt.Name = "studying_txt";
             this.studying_txt.Size = new System.Drawing.Size(391, 20);
             this.studying_txt.TabIndex = 12;
+            this.studying_txt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.studying_txt_KeyPress);
             // 
             // button3
             // 
@@ -287,7 +291,7 @@
             this.id_text.Name = "id_text";
             this.id_text.Size = new System.Drawing.Size(100, 20);
             this.id_text.TabIndex = 25;
-            this.id_text.TextChanged += new System.EventHandler(this.id_text_TextChanged);
+            this.id_text.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.id_text_KeyPress);
             // 
             // label1
             // 

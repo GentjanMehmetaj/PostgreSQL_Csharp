@@ -33,3 +33,4 @@ C:\Users\albana\Desktop\git\PostgreSQL_Csharp3\PostgreSQL\obj\Debug\PostgreSQL.e
 C:\Users\albana\Desktop\git\PostgreSQL_Csharp3\PostgreSQL\obj\Debug\PostgreSQL.pdb
 C:\Users\albana\Desktop\git\PostgreSQL_Csharp3\PostgreSQL\obj\Debug\PostgreSQL.csproj.ResolveComReference.cache
 C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PostgreSQL.csproj.ResolveComReference.cache
+C:\Users\albana\Desktop\git\PostgreSQL_Csharp\PostgreSQL\obj\Debug\PgSql.Login_Form.resources

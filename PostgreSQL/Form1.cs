@@ -32,7 +32,6 @@ namespace PgSql
         public Form1()
         {
             InitializeComponent();
-
         }
         public bool IsOpened(string wbook)
         {
@@ -571,7 +570,7 @@ namespace PgSql
             bool conn_True = DtServer.fileExist;
             if (conn_True)
             {
-                connection = new NpgsqlConnection(connstring);
+               
                 if (id_text.Text.ToString()!="")
                 {
                     if (firstname_txt.Text != "" && meadlename_txt.Text != "" && secondname_txt.Text != "" && studying_txt.Text != "")
@@ -579,6 +578,7 @@ namespace PgSql
                         string Query = "update public.student set first_name='" + this.firstname_txt.Text + "',last_name='" + this.secondname_txt.Text + "',meadle_name='" + this.meadlename_txt.Text + "',studying='" + this.studying_txt.Text + "'where id = '" + Convert.ToInt32(this.id_text.Text.ToString()) + "';";
                         try
                         {
+                            connection = new NpgsqlConnection(connstring);
                             command = new NpgsqlCommand(Query, connection);
                             // NpgsqlDataReader dataReader;
 
@@ -602,8 +602,8 @@ namespace PgSql
                         }
                         catch (Exception ex)
                         {
-                            // MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
-                            MessageBox.Show(ex.Message);
+                            MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
+                           // MessageBox.Show(ex.Message);
                         }
                         
                     }
@@ -627,8 +627,39 @@ namespace PgSql
 
         private void button11_Click(object sender, EventArgs e)
         {
-           
-           
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int selectedIndex = dataGridView1.SelectedRows[0].Index;
+
+                // gets the RowID from the first column in the grid
+                int rowID = int.Parse(dataGridView1[0, selectedIndex].Value.ToString());
+
+                string queryl = "DELETE FROM Table1 WHERE RowID = @RowID";
+
+                // your code for deleting it from the database
+
+                // then your code for refreshing the DataGridView
+            }
+
+
+            //            DtServer = pg_Connect.connect_database();
+            //            string connstring = DtServer.dt_connection;
+            //            bool conn_True = DtServer.fileExist;
+            //            string Query = "insert into public.student (first_name,last_name,meadle_name,studying) values('" + this.firstname_txt.Text + "','" + this.secondname_txt.Text + "','" + this.meadlename_txt.Text + "','" + this.studying_txt.Text + "');";
+            //            string q1 ="create table '"'+"login"+"'(id serial not null, "userName" text not null, "password" text not null) with(oids = false);";
+            //            // NpgsqlDataReader dataReader;
+            //            try
+            //            {
+            //                connection = new NpgsqlConnection(connstring);
+            //                command = new NpgsqlCommand(Query, connection);
+            //                connection.Open();
+            //                dataReader = command.ExecuteReader();
+            //            }
+            //            catch (Exception ex)
+            //            { MessageBox.Show(ex.Message); }
+            ////                create table "login"(id serial not null,"userName" text not null, "password" text not null) with(oids = false);
+            ////            alter table "login" owner to postgres;
+
         }
 
 

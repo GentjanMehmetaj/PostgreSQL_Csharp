@@ -27,8 +27,9 @@ namespace PgSql
         }
 
         private void button1_Click(object sender, EventArgs e)
-        { if (textBox1.Text == "user1" && textBox2.Text == "1")
-            {
+        {
+            //if (textBox1.Text == "user1" && textBox2.Text == "1")
+            //{
                 DtServer = pg_Connect.connect_database();
                 string connstring = DtServer.dt_connection;
                 bool conn_True = DtServer.fileExist;
@@ -57,19 +58,12 @@ namespace PgSql
                 {
                     MessageBox.Show("Connection to dataBase has Failed Because File with data connections not Exist or name of the file has changed!");
                 }
-            }
-            else
-            {
-                MessageBox.Show("Incorrect user name or password!(Or both!)");
-            }
-
-            ////if (connection!=null)
-            ////{
-            ////    //-------
-            ////    Form1 frm1 = new Form1();
-            ////    this.Hide();
-            ////    frm1.Show();
-            ////}
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Incorrect user name or password!(Or both!)");
+            //}
+        
            
         }
 
@@ -82,5 +76,7 @@ namespace PgSql
         {
             MessageBox.Show("user name is 'user1' password '1'");
         }
+
+      
     }
 }

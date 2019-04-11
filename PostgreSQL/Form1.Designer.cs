@@ -54,15 +54,18 @@
             this.button11 = new System.Windows.Forms.Button();
             this.id_text = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.button12 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(21, 220);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(20, 286);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(203, 59);
+            this.button1.Size = new System.Drawing.Size(155, 28);
             this.button1.TabIndex = 0;
             this.button1.Text = "Get data  from table student";
             this.button1.UseVisualStyleBackColor = true;
@@ -71,19 +74,19 @@
             // tbDataItems
             // 
             this.tbDataItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDataItems.Location = new System.Drawing.Point(21, 301);
+            this.tbDataItems.Location = new System.Drawing.Point(21, 333);
             this.tbDataItems.Multiline = true;
             this.tbDataItems.Name = "tbDataItems";
             this.tbDataItems.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbDataItems.Size = new System.Drawing.Size(491, 205);
+            this.tbDataItems.Size = new System.Drawing.Size(515, 205);
             this.tbDataItems.TabIndex = 1;
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(295, 220);
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(195, 286);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(217, 59);
+            this.button2.Size = new System.Drawing.Size(169, 28);
             this.button2.TabIndex = 2;
             this.button2.Text = "Get filtered data from table student";
             this.button2.UseVisualStyleBackColor = true;
@@ -174,7 +177,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(730, 12);
+            this.button4.Location = new System.Drawing.Point(803, 9);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(135, 44);
             this.button4.TabIndex = 13;
@@ -204,21 +207,21 @@
             // 
             // textBox_path
             // 
-            this.textBox_path.Location = new System.Drawing.Point(666, 403);
+            this.textBox_path.Location = new System.Drawing.Point(679, 455);
             this.textBox_path.Name = "textBox_path";
             this.textBox_path.Size = new System.Drawing.Size(272, 20);
             this.textBox_path.TabIndex = 16;
             // 
             // textBox_sheet
             // 
-            this.textBox_sheet.Location = new System.Drawing.Point(666, 433);
+            this.textBox_sheet.Location = new System.Drawing.Point(679, 485);
             this.textBox_sheet.Name = "textBox_sheet";
             this.textBox_sheet.Size = new System.Drawing.Size(272, 20);
             this.textBox_sheet.TabIndex = 17;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(564, 400);
+            this.button6.Location = new System.Drawing.Point(577, 452);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 18;
@@ -228,7 +231,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(564, 459);
+            this.button7.Location = new System.Drawing.Point(577, 511);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(420, 27);
             this.button7.TabIndex = 19;
@@ -239,7 +242,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(561, 436);
+            this.label6.Location = new System.Drawing.Point(574, 488);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 13);
             this.label6.TabIndex = 20;
@@ -247,7 +250,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(871, 12);
+            this.button8.Location = new System.Drawing.Point(1009, 13);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(113, 44);
             this.button8.TabIndex = 21;
@@ -257,9 +260,9 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(295, 165);
+            this.button9.Location = new System.Drawing.Point(381, 286);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(194, 34);
+            this.button9.Size = new System.Drawing.Size(154, 28);
             this.button9.TabIndex = 22;
             this.button9.Text = "Export DataBase to Text file";
             this.button9.UseVisualStyleBackColor = true;
@@ -267,7 +270,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(12, 165);
+            this.button10.Location = new System.Drawing.Point(12, 180);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(220, 29);
             this.button10.TabIndex = 23;
@@ -277,17 +280,17 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(990, 12);
+            this.button11.Location = new System.Drawing.Point(288, 180);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(132, 44);
+            this.button11.Size = new System.Drawing.Size(221, 29);
             this.button11.TabIndex = 24;
-            this.button11.Text = "free button";
+            this.button11.Text = "Delete selected row";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // id_text
             // 
-            this.id_text.Location = new System.Drawing.Point(118, 139);
+            this.id_text.Location = new System.Drawing.Point(118, 142);
             this.id_text.Name = "id_text";
             this.id_text.Size = new System.Drawing.Size(100, 20);
             this.id_text.TabIndex = 25;
@@ -297,18 +300,51 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 139);
+            this.label1.Location = new System.Drawing.Point(18, 142);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 13);
             this.label1.TabIndex = 26;
             this.label1.Text = "Id";
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(12, 232);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(139, 23);
+            this.button12.TabIndex = 27;
+            this.button12.Text = "Clear all data in this form";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(561, 387);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(453, 13);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "In the gridview you can make updtate of cells one by one : duble click on cell.";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(561, 400);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(320, 13);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Or you can select one row to make update and delete! ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1134, 508);
+            this.ClientSize = new System.Drawing.Size(1134, 550);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.button12);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.id_text);
             this.Controls.Add(this.button11);
@@ -337,6 +373,7 @@
             this.Controls.Add(this.button1);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -372,6 +409,9 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.TextBox id_text;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 

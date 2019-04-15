@@ -166,45 +166,48 @@ namespace PgSql
 
       private void button2_Click(object sender, EventArgs e)
         {
-               
-            DtServer = pg_Connect.connect_database();
-            string connstring = DtServer.dt_connection;
-            bool conn_True = DtServer.fileExist;
-
-            if (conn_True)
+            if (studying_txt.Text.ToString() != "")
             {
-              try
-                {
-                    
-                    connection = new NpgsqlConnection(connstring);
-                    connection.Open();
-                     command = new NpgsqlCommand("SELECT * FROM public.student WHERE id > '1' AND id < '4'", connection);
-                     dataReader = command.ExecuteReader();
-                    for (int i = 0; dataReader.Read(); i++)
-                    {
-                        dataItems.Add(dataReader[4].ToString() + "   " + dataReader[0].ToString() + "    " + dataReader[2].ToString() + "     " + dataReader[1].ToString() + "    " + dataReader[3].ToString() + "\r\n");
-                    }
-                    connection.Close();
-                    // connection i sukseshem me serverin. ruajme te dhenat e ketij serveri ne file(text). 
-                    //write_data_to_file(connstring);
-                    //return dataItems;
-                }
-                catch (Exception msg)
-                {
-                    MessageBox.Show("You can't connect with database! Please chek data connections saved in the file and try again");
-                    //MessageBox.Show(msg.ToString());
-                    //throw;
-                }
-            }
-                  
+                DtServer = pg_Connect.connect_database();
+                string connstring = DtServer.dt_connection;
+                bool conn_True = DtServer.fileExist;
 
-            tbDataItems.Clear();
-            for (int i = 0; i < dataItems.Count; i++)
-         {
-            tbDataItems.Text += dataItems[i];
-            tbDataItems.ScrollToCaret();
-         }
-            dataItems.Clear();
+                if (conn_True)
+                {
+                    try
+                    {
+
+                        connection = new NpgsqlConnection(connstring);
+                        connection.Open();
+                        command = new NpgsqlCommand("SELECT * FROM public.student WHERE studying='" + studying_txt.Text.ToString() + "'", connection);
+                        dataReader = command.ExecuteReader();
+                        for (int i = 0; dataReader.Read(); i++)
+                        {
+                            dataItems.Add(dataReader[4].ToString() + "   " + dataReader[0].ToString() + "    " + dataReader[2].ToString() + "     " + dataReader[1].ToString() + "    " + dataReader[3].ToString() + "\r\n");
+                        }
+                        connection.Close();
+                        // connection i sukseshem me serverin. ruajme te dhenat e ketij serveri ne file(text). 
+                        //write_data_to_file(connstring);
+                        //return dataItems;
+                    }
+                    catch (Exception msg)
+                    {
+                        MessageBox.Show("You can't connect with database! Please chek data connections saved in the file and try again");
+                        //MessageBox.Show(msg.ToString());
+                        //throw;
+                    }
+                }
+
+
+                tbDataItems.Clear();
+                for (int i = 0; i < dataItems.Count; i++)
+                {
+                    tbDataItems.Text += dataItems[i];
+                    tbDataItems.ScrollToCaret();
+                }
+                dataItems.Clear();
+            }
+            else { MessageBox.Show("Please fill the field studying in or to make search!"); }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -303,7 +306,7 @@ namespace PgSql
                 if (File.Exists(@"C:\Users\albana\Desktop\output.xlsx"))
                 {
 
-                    DialogResult result = MessageBox.Show("File exist! Do you want to owerite it?", "Please Confirm", MessageBoxButtons.YesNo);
+                    DialogResult result = MessageBox.Show("File exist! Do you want to owerite it?", "Please Confirm", MessageBoxButtons.YesNoCancel);
                     if (result == DialogResult.Yes)
                     {// if (app.ActiveWorkbook = true) { }
                      //    xlApp.IgnoreRemoteRequests = true;
@@ -337,8 +340,15 @@ namespace PgSql
                         //perjashtojme rastin kur eshte output1 dhe ne rastet tjera bejme 'show ["output"+"excelcopy-1+]'
                         workbook.SaveAs(@"C:\Users\albana\Desktop\output" + excelcopy + ".xlsx", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, _excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                         MessageBox.Show("File is saved in the same directori with existing file name and the name of file created is output" + excelcopy + ".xlsx");
+                        app.DisplayAlerts = false;
                         dataGridView1.DataSource = null;
                         dataGridView1.Refresh();
+                    }
+                    else if(result==DialogResult.Cancel)
+                    {
+                        app.DisplayAlerts = false;
+                        dataGridView1.Refresh();
+
                     }
                 }
                 else
@@ -568,144 +578,152 @@ namespace PgSql
         }
 
         private void button10_Click(object sender, EventArgs e)
-        {
-            DtServer = pg_Connect.connect_database();
-            string connstring = DtServer.dt_connection;
-            bool conn_True = DtServer.fileExist;
-            if (dataGridView1.DataSource != null || row_selected == 1)
+        { if (!data_load_from_excel_file)
             {
-                if (conn_True)
+                DtServer = pg_Connect.connect_database();
+                string connstring = DtServer.dt_connection;
+                bool conn_True = DtServer.fileExist;
+                if (dataGridView1.DataSource != null || row_selected == 1)
                 {
-                    if (id_text.Text.ToString() != "")
+                    if (conn_True)
                     {
-                        if (firstname_txt.Text != "" && meadlename_txt.Text != "" && secondname_txt.Text != "" && studying_txt.Text != "")
+                        if (id_text.Text.ToString() != "")
                         {
-                            string s1 = dataGridView1.Rows[row_selected].Cells[0].Value.ToString();
-                            string s2 = dataGridView1.Rows[row_selected].Cells[1].Value.ToString();
-                            string s3 = dataGridView1.Rows[row_selected].Cells[2].Value.ToString();
-                            string s4 = dataGridView1.Rows[row_selected].Cells[3].Value.ToString();
-                            if (firstname_txt.Text != dataGridView1.Rows[row_selected].Cells[0].Value.ToString()||secondname_txt.Text != dataGridView1.Rows[row_selected].Cells[1].Value.ToString()||meadlename_txt.Text != dataGridView1.Rows[row_selected].Cells[2].Value.ToString()||studying_txt.Text != dataGridView1.Rows[row_selected].Cells[3].Value.ToString())
+                            if (firstname_txt.Text != "" && meadlename_txt.Text != "" && secondname_txt.Text != "" && studying_txt.Text != "")
                             {
-                                string Query = "update public.student set first_name='" + this.firstname_txt.Text + "',last_name='" + this.secondname_txt.Text + "',meadle_name='" + this.meadlename_txt.Text + "',studying='" + this.studying_txt.Text + "'where id = '" + Convert.ToInt32(this.id_text.Text.ToString()) + "';";
-                                try
+                                //string s1 = dataGridView1.Rows[row_selected].Cells[0].Value.ToString();
+                                //string s2 = dataGridView1.Rows[row_selected].Cells[1].Value.ToString();
+                                //string s3 = dataGridView1.Rows[row_selected].Cells[2].Value.ToString();
+                                //string s4 = dataGridView1.Rows[row_selected].Cells[3].Value.ToString();
+                                if (firstname_txt.Text != dataGridView1.Rows[row_selected].Cells[0].Value.ToString() || secondname_txt.Text != dataGridView1.Rows[row_selected].Cells[1].Value.ToString() || meadlename_txt.Text != dataGridView1.Rows[row_selected].Cells[2].Value.ToString() || studying_txt.Text != dataGridView1.Rows[row_selected].Cells[3].Value.ToString())
                                 {
-                                    connection = new NpgsqlConnection(connstring);
-                                    command = new NpgsqlCommand(Query, connection);
-                                    // NpgsqlDataReader dataReader;
-
-                                    connection.Open();
-                                    dataReader = command.ExecuteReader();
-                                    MessageBox.Show("Data saved to the database!");
-                                    //fshirja e fushave pasi behet update ne database
-                                    firstname_txt.Clear(); meadlename_txt.Clear();
-                                    secondname_txt.Clear(); studying_txt.Clear();
-                                    id_text.Clear();//dt_put_user = false;
-
-                                    //Ruajtja e te dhenave te serverit ne file
-                                    //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
-                                    // PostGreSQL data_server = new PostGreSQL();
-                                    // data_server.write_data_to_file(connstring);
-
-                                    while (dataReader.Read())
+                                    string Query = "update public.student set first_name='" + this.firstname_txt.Text + "',last_name='" + this.secondname_txt.Text + "',meadle_name='" + this.meadlename_txt.Text + "',studying='" + this.studying_txt.Text + "'where id = '" + Convert.ToInt32(this.id_text.Text.ToString()) + "';";
+                                    try
                                     {
+                                        connection = new NpgsqlConnection(connstring);
+                                        command = new NpgsqlCommand(Query, connection);
+                                        // NpgsqlDataReader dataReader;
 
+                                        connection.Open();
+                                        dataReader = command.ExecuteReader();
+                                        // dataGridView1.Rows[row_selected].Cells[0].Value= firstname_txt.Text;
+                                        MessageBox.Show("Data saved to the database!");
+                                        //fshirja e fushave pasi behet update ne database
+                                        dataGridView1.Rows.RemoveAt(row_selected);
+                                        firstname_txt.Clear(); meadlename_txt.Clear();
+                                        secondname_txt.Clear(); studying_txt.Clear();
+                                        id_text.Clear();//dt_put_user = false;
+
+                                        //Ruajtja e te dhenave te serverit ne file
+                                        //Rasti kur shtohet nje student ruhen te dhenat e ketij serveri tek i cili u be shtimi i studentit.
+                                        // PostGreSQL data_server = new PostGreSQL();
+                                        // data_server.write_data_to_file(connstring);
+
+                                        while (dataReader.Read())
+                                        {
+
+                                        }
                                     }
-                                }
-                                catch (Exception ex)
-                                {
-                                    MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
-                                    // MessageBox.Show(ex.Message);
-                                }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
+                                        // MessageBox.Show(ex.Message);
+                                    }
 
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Nothing to update!No change are made in the selected row!");
+                                    firstname_txt.Clear();
+                                    secondname_txt.Clear();
+                                    meadlename_txt.Clear();
+                                    studying_txt.Clear();
+                                    id_text.Clear();
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Nothing to update!No change are made in the selected row!");
-                                firstname_txt.Clear();
-                                secondname_txt.Clear();
-                                meadlename_txt.Clear();
-                                studying_txt.Clear();
-                                id_text.Clear();
+                                MessageBox.Show("Please fill all the fields in order to insert the data into the database");
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Please fill all the fields in order to insert the data into the database");
+                            MessageBox.Show("Nothing to update! You can make update after you select on row in the gridview");
                         }
+
                     }
                     else
                     {
-                        MessageBox.Show("Nothing to update! You can make update after you select on row in the gridview");
+                        MessageBox.Show("Connection to dataBase has Failed Because File with data connections not Exist or name of the file has changed!");
                     }
+                }
 
-                }
-                else
-                {
-                    MessageBox.Show("Connection to dataBase has Failed Because File with data connections not Exist or name of the file has changed!");
-                }
             }
-            
-            
+            else { MessageBox.Show("Nothing to update! Data are not came from data base and can't do update!"); }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-             //  int id= int.Parse(id_text.Text.ToString());             
-             //   string Query = "delete from public.student where id =" + id + ";";
-                       
-            DtServer = pg_Connect.connect_database();
-            string connstring = DtServer.dt_connection;
-            bool conn_True = DtServer.fileExist;
-            if (dataGridView1.DataSource != null || row_selected == 1)
+            //  int id= int.Parse(id_text.Text.ToString());             
+            //   string Query = "delete from public.student where id =" + id + ";";
+            if (!data_load_from_excel_file)
             {
-                if (conn_True)
+                DtServer = pg_Connect.connect_database();
+                string connstring = DtServer.dt_connection;
+                bool conn_True = DtServer.fileExist;
+                if (dataGridView1.DataSource != null || row_selected == 1)
                 {
-                    if (id_text.Text.ToString() != "")
+                    if (conn_True)
                     {
-                        //if (firstname_txt.Text != "" && meadlename_txt.Text != "" && secondname_txt.Text != "" && studying_txt.Text != "")
-                        //{
-                        string Query = "delete from public.student where id = '" + int.Parse(this.id_text.Text.ToString()) + "';";
-                        try
+                        if (id_text.Text.ToString() != "")
                         {
-                            connection = new NpgsqlConnection(connstring);
-                            command = new NpgsqlCommand(Query, connection);
-                            // NpgsqlDataReader dataReader;
-
-                            connection.Open();
-                            dataReader = command.ExecuteReader();
-                            MessageBox.Show("Data deleted to the database!");
-                            // int row_index = dataGridView1.CurrentCell.RowIndex;
-                            // row selected cleared
-                            dataGridView1.Rows.RemoveAt(row_selected);
-                            //fshirja e fushave pasi behet delete ne database
-                            firstname_txt.Clear(); meadlename_txt.Clear();
-                            secondname_txt.Clear(); studying_txt.Clear();
-                            id_text.Clear();//dt_put_user = false;
-
-                            while (dataReader.Read())
+                            //if (firstname_txt.Text != "" && meadlename_txt.Text != "" && secondname_txt.Text != "" && studying_txt.Text != "")
+                            //{
+                            string Query = "delete from public.student where id = '" + int.Parse(this.id_text.Text.ToString()) + "';";
+                            try
                             {
+                                connection = new NpgsqlConnection(connstring);
+                                command = new NpgsqlCommand(Query, connection);
+                                // NpgsqlDataReader dataReader;
 
+                                connection.Open();
+                                dataReader = command.ExecuteReader();
+                                MessageBox.Show("Data deleted to the database!");
+                                // int row_index = dataGridView1.CurrentCell.RowIndex;
+                                // row selected cleared
+                                dataGridView1.Rows.RemoveAt(row_selected);
+                                //fshirja e fushave pasi behet delete ne database
+                                firstname_txt.Clear(); meadlename_txt.Clear();
+                                secondname_txt.Clear(); studying_txt.Clear();
+                                id_text.Clear();//dt_put_user = false;
+
+                                while (dataReader.Read())
+                                {
+
+                                }
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            //  MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
-                            MessageBox.Show(ex.Message);
-                        }
+                            catch (Exception ex)
+                            {
+                                //  MessageBox.Show("You can't connect with database! And for this reason you can not add data to the databas.Please chek data connections saved in the file and try again");
+                                MessageBox.Show(ex.Message);
+                            }
 
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Nothing to delete! You can delete after you select on row in the gridview!");
+                        }
 
                     }
                     else
                     {
-                        MessageBox.Show("Nothing to delete! You can delete after you select on row in the gridview!");
+                        MessageBox.Show("Connection to dataBase has Failed Because File with data connections not Exist or name of the file has changed!");
                     }
-
-                }
-                else
-                {
-                    MessageBox.Show("Connection to dataBase has Failed Because File with data connections not Exist or name of the file has changed!");
                 }
             }
+            else { MessageBox.Show("Nothing to Delete! Data are not came from data base and can't do delete!"); }
+
 
         }
 
@@ -922,19 +940,25 @@ namespace PgSql
 
         private void button12_Click(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = null;
+           // tbDataItems.Clear();
+            //textBox_path.Clear();
+           // textBox_sheet.Clear();
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
             firstname_txt.Clear();
             secondname_txt.Clear();
             meadlename_txt.Clear();
             studying_txt.Clear();
             id_text.Clear();
-            dataGridView1.DataSource = null;
-            tbDataItems.Clear();
-            textBox_path.Clear();
-            textBox_sheet.Clear();
-
         }
 
         
+
+
 
         //nese nuk ndodh ndryshimi ne cell
         private void cellclick(object sender, DataGridViewCellEventArgs e)

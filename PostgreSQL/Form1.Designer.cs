@@ -57,6 +57,7 @@
             this.button12 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.button13 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +66,7 @@
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(20, 286);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 28);
+            this.button1.Size = new System.Drawing.Size(177, 28);
             this.button1.TabIndex = 0;
             this.button1.Text = "Get data  from table student";
             this.button1.UseVisualStyleBackColor = true;
@@ -84,11 +85,11 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(195, 286);
+            this.button2.Location = new System.Drawing.Point(331, 286);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(169, 28);
+            this.button2.Size = new System.Drawing.Size(194, 28);
             this.button2.TabIndex = 2;
-            this.button2.Text = "Get filtered data from table student";
+            this.button2.Text = "Get filtered data (fill the field \'Studing\')";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -169,9 +170,9 @@
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Location = new System.Drawing.Point(288, 22);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(221, 64);
+            this.button3.Size = new System.Drawing.Size(221, 48);
             this.button3.TabIndex = 10;
-            this.button3.Text = "Insert data into table student";
+            this.button3.Text = "Insert data into table student to the data base";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -260,7 +261,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(381, 286);
+            this.button9.Location = new System.Drawing.Point(371, 232);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(154, 28);
             this.button9.TabIndex = 22;
@@ -274,7 +275,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(220, 29);
             this.button10.TabIndex = 23;
-            this.button10.Text = "Update slected row in grid view";
+            this.button10.Text = "Update to DB slected row in grid view";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -284,7 +285,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(221, 29);
             this.button11.TabIndex = 24;
-            this.button11.Text = "Delete selected row";
+            this.button11.Text = "Delete to Data Base selected row";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -308,11 +309,11 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(12, 232);
+            this.button12.Location = new System.Drawing.Point(1009, 416);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(139, 23);
+            this.button12.Size = new System.Drawing.Size(113, 23);
             this.button12.TabIndex = 27;
-            this.button12.Text = "Clear all data in this form";
+            this.button12.Text = "Clear data grid view";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -336,12 +337,23 @@
             this.label8.TabIndex = 29;
             this.label8.Text = "Or you can select one row to make update and delete! ";
             // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(288, 80);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(101, 23);
+            this.button13.TabIndex = 30;
+            this.button13.Text = "Clear All this Field";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1134, 550);
+            this.Controls.Add(this.button13);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.button12);
@@ -412,6 +424,7 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button13;
     }
 }
 

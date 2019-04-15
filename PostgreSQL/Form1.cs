@@ -758,7 +758,7 @@ namespace PgSql
                                     {
                                         connection.Open();
                                         dataReader = command.ExecuteReader();
-
+                                    MessageBox.Show("This cell is update to table in database");
                                         connection.Close();
                                         while (dataReader.Read())
                                         {
@@ -768,7 +768,8 @@ namespace PgSql
                                     catch (Exception ex)
                                     {
                                         MessageBox.Show(ex.Message);
-                                    }
+                                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                                }
                                     dataGridView1.Refresh();
                                     break;
                                 case 1:
@@ -781,8 +782,8 @@ namespace PgSql
                                     {
                                         connection.Open();
                                         dataReader = command.ExecuteReader();
-
-                                        connection.Close();
+                                    MessageBox.Show("This cell is update to table in database");
+                                    connection.Close();
                                         while (dataReader.Read())
                                         {
 
@@ -791,7 +792,8 @@ namespace PgSql
                                     catch (Exception ex)
                                     {
                                         MessageBox.Show(ex.Message);
-                                    }
+                                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                                }
                                     dataGridView1.Refresh();
                                     break;
                                 case 2:
@@ -802,8 +804,8 @@ namespace PgSql
                                     {
                                         connection.Open();
                                         dataReader = command.ExecuteReader();
-
-                                        connection.Close();
+                                    MessageBox.Show("This cell is update to table in database");
+                                    connection.Close();
                                         while (dataReader.Read())
                                         {
 
@@ -812,7 +814,8 @@ namespace PgSql
                                     catch (Exception ex)
                                     {
                                         MessageBox.Show(ex.Message);
-                                    }
+                                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                                }
                                     dataGridView1.Refresh();
                                     break;
                                 case 3:
@@ -824,8 +827,8 @@ namespace PgSql
                                     {
                                         connection.Open();
                                         dataReader = command.ExecuteReader();
-
-                                        connection.Close();
+                                    MessageBox.Show("This cell is update to table in database");
+                                    connection.Close();
                                         while (dataReader.Read())
                                         {
 
@@ -834,7 +837,8 @@ namespace PgSql
                                     catch (Exception ex)
                                     {
                                         MessageBox.Show(ex.Message);
-                                    }
+                                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                                }
                                     break;
                                 case 4:
                                     dataGridView1.Refresh();
@@ -851,6 +855,8 @@ namespace PgSql
                     else
                     {
                         MessageBox.Show("Connection to dataBase has Failed Because File with data connections not Exist or name of the file has changed!");
+                        this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                        dataGridView1.Refresh();
                     }
 
                     

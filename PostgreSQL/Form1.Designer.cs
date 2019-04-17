@@ -85,7 +85,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(331, 286);
+            this.button2.Location = new System.Drawing.Point(331, 111);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(194, 28);
             this.button2.TabIndex = 2;
@@ -161,14 +161,14 @@
             // 
             this.studying_txt.Location = new System.Drawing.Point(118, 116);
             this.studying_txt.Name = "studying_txt";
-            this.studying_txt.Size = new System.Drawing.Size(391, 20);
+            this.studying_txt.Size = new System.Drawing.Size(197, 20);
             this.studying_txt.TabIndex = 12;
             this.studying_txt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.studying_txt_KeyPress);
             // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(288, 22);
+            this.button3.Location = new System.Drawing.Point(304, 22);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(221, 48);
             this.button3.TabIndex = 10;
@@ -182,7 +182,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(135, 44);
             this.button4.TabIndex = 13;
-            this.button4.Text = "Save data to File Excel";
+            this.button4.Text = "Export to Excel";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -202,7 +202,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(160, 44);
             this.button5.TabIndex = 15;
-            this.button5.Text = "Import From Data Base and Show";
+            this.button5.Text = "Show table from Data Base ";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -255,7 +255,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(113, 44);
             this.button8.TabIndex = 21;
-            this.button8.Text = "ADD data to DataBase";
+            this.button8.Text = "ADD to Data Base";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -281,7 +281,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(288, 180);
+            this.button11.Location = new System.Drawing.Point(304, 180);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(221, 29);
             this.button11.TabIndex = 24;
@@ -339,7 +339,7 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(288, 80);
+            this.button13.Location = new System.Drawing.Point(424, 145);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(101, 23);
             this.button13.TabIndex = 30;

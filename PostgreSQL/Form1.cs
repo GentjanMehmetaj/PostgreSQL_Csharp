@@ -75,7 +75,7 @@ namespace PgSql
             int row_check = 0;
             if (dataGridView1.Columns.Count == 5)
             {
-              // MessageBox.Show(dataGridView1.Columns[0].Name.ToString());
+              //MessageBox.Show(dataGridView1.Columns[0].Name.ToString());
                 if (dataGridView1.Columns[0].Name.ToString() == "first_name" && dataGridView1.Columns[1].Name.ToString() == "last_name" && dataGridView1.Columns[2].Name.ToString() == "meadle_name" && dataGridView1.Columns[3].Name.ToString() == "studying")
                 {
                     file_excel_formated_ok = true;
@@ -422,115 +422,125 @@ namespace PgSql
         }
 
         private void button7_Click(object sender, EventArgs e)
-        {
-            dataGridView1.DataSource = null;
-            string pathconn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + textBox_path.Text + ";Extended Properties=\"Excel 12.0; HDR=YES;\" ; ";
-            OleDbConnection conn = new OleDbConnection(pathconn);
-            //foreach ( sheet in workbook.Sheets)
-            //{
-            //    if (sheet.Name.equals("sheetName"))
-            //    {
-            //        //do something
-            //    }
-            //}
-            try
+        {if (textBox_path.Text != "" && textBox_sheet.Text != "")
             {
-                OleDbDataAdapter mydataadapter = new OleDbDataAdapter("Select * from [" + textBox_sheet.Text + "$]", conn);
-                DataTable dt = new DataTable();
-                mydataadapter.Fill(dt);
-                dataGridView1.DataSource = dt;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Name of the sheet is incorect!Please write correct name of excel sheet like it is in your workbook!" );
-            }
-            data_load_from_excel_file = true;
+                dataGridView1.DataSource = null;
+                string pathconn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + textBox_path.Text + ";Extended Properties=\"Excel 12.0; HDR=YES;\" ; ";
+                if (File.Exists(textBox_path.Text.ToString()))
+                {
+                    OleDbConnection conn = new OleDbConnection(pathconn);
+                    try
+                    {
+                        OleDbDataAdapter mydataadapter = new OleDbDataAdapter("Select * from [" + textBox_sheet.Text + "$]", conn);
+                        DataTable dt = new DataTable();
+                        mydataadapter.Fill(dt);
+                        dataGridView1.DataSource = dt;
 
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("This sheet not exist in your workbook! Please write correct the sheet name that you want to load!");
+                    }
+                }
+                else { MessageBox.Show("File not exist at this location!Check path!"); }
+               
+                data_load_from_excel_file = true;
+                
+            }
+            else { MessageBox.Show("Please choose the file and Write the sheet name!"); }
         }
         // update table in database from gridview
         private void button8_Click(object sender, EventArgs e)
         {
             if (dataGridView1.DataSource != null)
             {
-                DtServer = pg_Connect.connect_database();
-                string connstring = DtServer.dt_connection;
-                bool conn_True = DtServer.fileExist;
-                if (conn_True)
+                if (dataGridView1.Columns[0].Name.ToString() == "first_name" && dataGridView1.Columns[1].Name.ToString() == "last_name" && dataGridView1.Columns[2].Name.ToString() == "meadle_name" && dataGridView1.Columns[3].Name.ToString() == "studying")
                 {
-                    if (data_load_from_excel_file == true)
+                    DtServer = pg_Connect.connect_database();
+                    string connstring = DtServer.dt_connection;
+                    bool conn_True = DtServer.fileExist;
+                    if (conn_True)
                     {
-                     
-                        // ValidFileCheck result = Validate_File(); ketu fillon
-                        if (Validate_File())
+                        if (data_load_from_excel_file == true)
                         {
-                            bool dt_saved_ok = true;
-                            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+
+                            // ValidFileCheck result = Validate_File(); ketu fillon
+                            if (Validate_File())
                             {
-                                // if (dataGridView1.Rows[i].Cells[0].Value.ToString() != "" && dataGridView1.Rows[i].Cells[1].Value.ToString() != "" && dataGridView1.Rows[i].Cells[2].Value.ToString() != "" && dataGridView1.Rows[i].Cells[3].Value.ToString() != "" && dataGridView1.Rows[i].Cells[4].Value.ToString() != "")
-                                //{
-                                string Query = "insert into public.student (first_name,last_name,meadle_name,studying) values('" + dataGridView1.Rows[i].Cells[0].Value + "','" + dataGridView1.Rows[i].Cells[1].Value + "','" + dataGridView1.Rows[i].Cells[2].Value + "','" + dataGridView1.Rows[i].Cells[3].Value + "');";
-                                try
+                                bool dt_saved_ok = true;
+                                for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
                                 {
-                                    connection = new NpgsqlConnection(connstring);
-                                    command = new NpgsqlCommand(Query, connection);
-
-                                // NpgsqlDataReader dataReader;
-                               
-                                    connection.Open();
-                                    dataReader = command.ExecuteReader();
-
-                                    connection.Close();
-                                  //  MessageBox.Show("Data saved to the database!");
-                                    while (dataReader.Read())
+                                    // if (dataGridView1.Rows[i].Cells[0].Value.ToString() != "" && dataGridView1.Rows[i].Cells[1].Value.ToString() != "" && dataGridView1.Rows[i].Cells[2].Value.ToString() != "" && dataGridView1.Rows[i].Cells[3].Value.ToString() != "" && dataGridView1.Rows[i].Cells[4].Value.ToString() != "")
+                                    //{
+                                    string Query = "insert into public.student (first_name,last_name,meadle_name,studying) values('" + dataGridView1.Rows[i].Cells[0].Value + "','" + dataGridView1.Rows[i].Cells[1].Value + "','" + dataGridView1.Rows[i].Cells[2].Value + "','" + dataGridView1.Rows[i].Cells[3].Value + "');";
+                                    try
                                     {
+                                        connection = new NpgsqlConnection(connstring);
+                                        command = new NpgsqlCommand(Query, connection);
 
+                                        // NpgsqlDataReader dataReader;
+
+                                        connection.Open();
+                                        dataReader = command.ExecuteReader();
+
+                                        connection.Close();
+                                        //  MessageBox.Show("Data saved to the database!");
+                                        while (dataReader.Read())
+                                        {
+
+                                        }
                                     }
-                                }
-                                catch (Exception ex)
-                                {
-                                    MessageBox.Show("You can't connect with database and for this reason you can not save this data!Please chek data connections saved in the file and try again");
-                                    dt_saved_ok = false;
-                                   // MessageBox.Show(ex.Message);
-                                }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show("You can't connect with database and for this reason you can not save this data!Please chek data connections saved in the file and try again");
+                                        dt_saved_ok = false;
+                                        // MessageBox.Show(ex.Message);
+                                    }
 
-                                
-                            }
-                            if (dt_saved_ok)
-                            {
-                                MessageBox.Show("Data saved to the database!");
-                                dataGridView1.DataSource = null;
-                                dataGridView1.Refresh();
-                            }
-                        }
-                        else
-                        {
-                            if (file_excel_formated_ok == true)
-                            {
-                                MessageBox.Show("Cell must contain only letter and must be not empty!In the RED line to the DataGridView you have wrong data to one or more cell! The data can't insert to the data base");
+
+                                }
+                                if (dt_saved_ok)
+                                {
+                                    MessageBox.Show("Data saved to the database!");
+                                    dataGridView1.DataSource = null;
+                                    dataGridView1.Refresh();
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("As you can see in the gridview : Sheet File Excel that you select has wrong Data");
+                                if (file_excel_formated_ok == true)
+                                {
+                                    MessageBox.Show("Cell must contain only letter and must be not empty!In the RED line to the DataGridView you have wrong data to one or more cell! The data can't insert to the data base");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("As you can see in the gridview : Sheet File Excel that you select has wrong Data");
+                                }
+                            }
+                            // catch (Exception ex)
+                            //{
+                            //    MessageBox.Show(ex.Message);
+                            //}
+                            //ketu mbaron
+                        }
+                        else
+                        {
+                            if (data_load_from_excel_file == false)
+                            {
+                                MessageBox.Show("This date are imported from database and can not be ADD again! You can do Update by cklick on cell and edit Value!");
+
                             }
                         }
-                        // catch (Exception ex)
-                        //{
-                        //    MessageBox.Show(ex.Message);
-                        //}
-                        //ketu mbaron
                     }
                     else
                     {
-                        if (data_load_from_excel_file == false)
-                        {
-                            MessageBox.Show("This date are imported from database and can not be ADD again! You can do Update by cklick on cell and edit Value!");
-
-                        }
+                        MessageBox.Show("Connection to dataBase has Failed Because File with data connections not Exist or name of the file has changed!");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Connection to dataBase has Failed Because File with data connections not Exist or name of the file has changed!");
+                    MessageBox.Show("As you can see in the gridview : Sheet File Excel that you select has wrong Data");
+                  //  MessageBox.Show("As you can see this is a Wrong file!");
                 }
             }
             else
@@ -730,35 +740,37 @@ namespace PgSql
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         { //vlera e cell e ndryshuar
-            valueChange = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null&&NOvalueChange!=valueChange&&data_load_from_excel_file==false)
+            if (dataGridView1.Columns[0].Name.ToString() == "first_name" && dataGridView1.Columns[1].Name.ToString() == "last_name" && dataGridView1.Columns[2].Name.ToString() == "meadle_name" && dataGridView1.Columns[3].Name.ToString() == "studying")
             {
-                DialogResult result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNo);
-                  if (result == DialogResult.Yes&&valueChange!="" && dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().All(c => char.IsLetter(c)))
+                valueChange = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null && NOvalueChange != valueChange && data_load_from_excel_file == false)
                 {
-                   
-                    DtServer = pg_Connect.connect_database();
-                    string connstring = DtServer.dt_connection;
-                     bool conn_True = DtServer.fileExist;
+                    DialogResult result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes && valueChange != "" && dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().All(c => char.IsLetter(c)))
+                    {
 
-                    if (conn_True)
-                    {  
+                        DtServer = pg_Connect.connect_database();
+                        string connstring = DtServer.dt_connection;
+                        bool conn_True = DtServer.fileExist;
+
+                        if (conn_True)
+                        {
                             connection = new NpgsqlConnection(connstring);
                             int Column_index = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].ColumnIndex.ToString());
                             int value_of_id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString());
-                      
+
                             switch (Column_index)
                             {
                                 case 0:
-                                   
+
                                     string Query = "update public.student set first_name='" + valueChange + "'where id = '" + value_of_id + "';";
                                     command = new NpgsqlCommand(Query, connection);
-                                
+
                                     try
                                     {
                                         connection.Open();
                                         dataReader = command.ExecuteReader();
-                                    MessageBox.Show("This cell is update to table in database");
+                                        MessageBox.Show("This cell is update to table in database");
                                         connection.Close();
                                         while (dataReader.Read())
                                         {
@@ -768,8 +780,8 @@ namespace PgSql
                                     catch (Exception ex)
                                     {
                                         MessageBox.Show(ex.Message);
-                                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
-                                }
+                                        this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                                    }
                                     dataGridView1.Refresh();
                                     break;
                                 case 1:
@@ -782,8 +794,8 @@ namespace PgSql
                                     {
                                         connection.Open();
                                         dataReader = command.ExecuteReader();
-                                    MessageBox.Show("This cell is update to table in database");
-                                    connection.Close();
+                                        MessageBox.Show("This cell is update to table in database");
+                                        connection.Close();
                                         while (dataReader.Read())
                                         {
 
@@ -792,8 +804,8 @@ namespace PgSql
                                     catch (Exception ex)
                                     {
                                         MessageBox.Show(ex.Message);
-                                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
-                                }
+                                        this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                                    }
                                     dataGridView1.Refresh();
                                     break;
                                 case 2:
@@ -804,8 +816,8 @@ namespace PgSql
                                     {
                                         connection.Open();
                                         dataReader = command.ExecuteReader();
-                                    MessageBox.Show("This cell is update to table in database");
-                                    connection.Close();
+                                        MessageBox.Show("This cell is update to table in database");
+                                        connection.Close();
                                         while (dataReader.Read())
                                         {
 
@@ -814,8 +826,8 @@ namespace PgSql
                                     catch (Exception ex)
                                     {
                                         MessageBox.Show(ex.Message);
-                                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
-                                }
+                                        this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                                    }
                                     dataGridView1.Refresh();
                                     break;
                                 case 3:
@@ -827,8 +839,8 @@ namespace PgSql
                                     {
                                         connection.Open();
                                         dataReader = command.ExecuteReader();
-                                    MessageBox.Show("This cell is update to table in database");
-                                    connection.Close();
+                                        MessageBox.Show("This cell is update to table in database");
+                                        connection.Close();
                                         while (dataReader.Read())
                                         {
 
@@ -837,8 +849,8 @@ namespace PgSql
                                     catch (Exception ex)
                                     {
                                         MessageBox.Show(ex.Message);
-                                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
-                                }
+                                        this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                                    }
                                     break;
                                 case 4:
                                     dataGridView1.Refresh();
@@ -849,40 +861,41 @@ namespace PgSql
                                     break;
 
                             }
-                       
-                        
+
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Connection to dataBase has Failed Because File with data connections not Exist or name of the file has changed!");
+                            this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                            dataGridView1.Refresh();
+                        }
+
+
                     }
-                    else
+                    else if (result == DialogResult.No)
                     {
-                        MessageBox.Show("Connection to dataBase has Failed Because File with data connections not Exist or name of the file has changed!");
+                        //cell-it ne datagridview i jepet vlera e qe kishte perpara setetentohej modifikimi
+                        this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                        dataGridView1.Refresh();
+                    }
+                    else if (valueChange == "")
+                    {
+                        MessageBox.Show("You can not add empty field to the database!");
+                        // valueChange = valuetemp;
+                        this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
+                        dataGridView1.Refresh();
+                    }
+                    else if (!dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().All(c => char.IsLetter(c)))
+                    {
+                        MessageBox.Show("Is not valid update cell!Please use letter");
                         this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
                         dataGridView1.Refresh();
                     }
 
-                    
-                }
-                else if (result == DialogResult.No)
-                {
-                   //cell-it ne datagridview i jepet vlera e qe kishte perpara setetentohej modifikimi
-                   this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value=NOvalueChange;
-                    dataGridView1.Refresh();
-                }
-                else if (valueChange=="")
-                {
-                    MessageBox.Show("You can not add empty field to the database!");
-                   // valueChange = valuetemp;
-                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
-                    dataGridView1.Refresh();
-                }
-                else if (!dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().All(c => char.IsLetter(c)))
-                { MessageBox.Show("Is not valid update cell!Please use letter");
-                    this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = NOvalueChange;
-                    dataGridView1.Refresh();
                 }
 
             }
-                       
-          
         }
 
       
@@ -962,32 +975,33 @@ namespace PgSql
             id_text.Clear();
         }
 
-        
-
-
 
         //nese nuk ndodh ndryshimi ne cell
         private void cellclick(object sender, DataGridViewCellEventArgs e)
-        {   row_selected = e.RowIndex;
-            dataGridView1.Columns[4].ReadOnly = true;
-            if (e.ColumnIndex == 4)
+        {
+            if (dataGridView1.Columns[0].Name.ToString() == "first_name" && dataGridView1.Columns[1].Name.ToString() == "last_name" && dataGridView1.Columns[2].Name.ToString() == "meadle_name" && dataGridView1.Columns[3].Name.ToString() == "studying")
             {
-                MessageBox.Show("This column is read only and can not be changed!");
-            }
-            else if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {//ruajtja e vleres ne momentin e cklikimit ne cell
-                NOvalueChange = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                row_selected = e.RowIndex;
+                dataGridView1.Columns[4].ReadOnly = true;
+                if (e.ColumnIndex == 4)
+                {
+                    MessageBox.Show("This column is read only and can not be changed!");
+                }
+                else if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {//ruajtja e vleres ne momentin e cklikimit ne cell
+                    NOvalueChange = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
 
-            }//zgjedhja e nje rreshti ne datagrid view ne rast se duam te bejme update te ndonjeres nga fushat
-            else if (e.ColumnIndex<0&&e.RowIndex>=0)
-            {
-                DataGridViewRow rowselected = dataGridView1.Rows[row_selected];
-                firstname_txt.Text = rowselected.Cells[0].Value.ToString();
-                secondname_txt.Text = rowselected.Cells[1].Value.ToString();
-                meadlename_txt.Text = rowselected.Cells[2].Value.ToString();
-                studying_txt.Text = rowselected.Cells[3].Value.ToString();
-                id_text.Text= rowselected.Cells[4].Value.ToString();
-                
+                }//zgjedhja e nje rreshti ne datagrid view ne rast se duam te bejme update te ndonjeres nga fushat
+                else if (e.ColumnIndex < 0 && e.RowIndex >= 0)
+                {
+                    DataGridViewRow rowselected = dataGridView1.Rows[row_selected];
+                    firstname_txt.Text = rowselected.Cells[0].Value.ToString();
+                    secondname_txt.Text = rowselected.Cells[1].Value.ToString();
+                    meadlename_txt.Text = rowselected.Cells[2].Value.ToString();
+                    studying_txt.Text = rowselected.Cells[3].Value.ToString();
+                    id_text.Text = rowselected.Cells[4].Value.ToString();
+
+                }
             }
         }
     }

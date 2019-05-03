@@ -1,0 +1,300 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.2
+-- Dumped by pg_dump version 11.2
+
+-- Started on 2019-05-03 22:10:45
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO postgres;
+
+--
+-- TOC entry 2829 (class 0 OID 0)
+-- Dependencies: 3
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 198 (class 1259 OID 32920)
+-- Name: login; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.login (
+    id_user integer NOT NULL,
+    username character varying NOT NULL,
+    password character varying NOT NULL
+);
+
+
+ALTER TABLE public.login OWNER TO postgres;
+
+--
+-- TOC entry 199 (class 1259 OID 32923)
+-- Name: login_id_user_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.login_id_user_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.login_id_user_seq OWNER TO postgres;
+
+--
+-- TOC entry 2830 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: login_id_user_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.login_id_user_seq OWNED BY public.login.id_user;
+
+
+--
+-- TOC entry 196 (class 1259 OID 24677)
+-- Name: student; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.student (
+    first_name character varying,
+    last_name character varying,
+    meadle_name character varying,
+    studying character varying,
+    id integer NOT NULL
+);
+
+
+ALTER TABLE public.student OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 24715)
+-- Name: student_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.student_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.student_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2831 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: student_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.student_id_seq OWNED BY public.student.id;
+
+
+--
+-- TOC entry 2694 (class 2604 OID 32925)
+-- Name: login id_user; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.login ALTER COLUMN id_user SET DEFAULT nextval('public.login_id_user_seq'::regclass);
+
+
+--
+-- TOC entry 2693 (class 2604 OID 24717)
+-- Name: student id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.student ALTER COLUMN id SET DEFAULT nextval('public.student_id_seq'::regclass);
+
+
+--
+-- TOC entry 2822 (class 0 OID 32920)
+-- Dependencies: 198
+-- Data for Name: login; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.login (id_user, username, password) FROM stdin;
+1	admin	admin
+2	user1	admin1
+\.
+
+
+--
+-- TOC entry 2820 (class 0 OID 24677)
+-- Dependencies: 196
+-- Data for Name: student; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.student (first_name, last_name, meadle_name, studying, id) FROM stdin;
+Albana	suf	Fadil	Informatike	54
+Meco	Dine	H	Informatike	116
+Albana	suf	Fadil	Informatike	117
+Albana	sufaj	Fadil	Informatike	119
+Albana	sufaj	Fadil	Informatike	93
+Albanaaaaa	Sufaj	Fadil	Informatike	120
+Franc	kafka	H	Filozof	121
+Albanaaaaa	Sufaj	Fadil	Informatike	96
+Franc	kafka	H	Filozof	98
+Arben	Sufaj	Fadil	Biologji	85
+Albana	suf	Fadil	Informatike	122
+Galileo	Galileu	oooooooooooo	Fisikant	52
+gentjan	bbb	ccc	ddd	46
+gentjan	bbb	ccc	ddd	47
+Arben	Sufaj	Fadil	Biologji	86
+Erich	Remark	M..	Writer.pylosoph	14
+Keidi	Mehmetaj	Elion	Robotike and programim	20
+Nikoll	Gogol	P...	Writer,phylosoph	28
+Erichu	Remark	Maria	Writer.pylosoph	39
+Millosho	Nikolla	Gjergj	Poet	29
+Mirsad	Kukaj	Agim	Filozof	34
+Eric	Remark	Maria	Writer.pylosoph	30
+Arben	Sufaj	Fadil	Biologji	87
+Mirsa	Kukaj	Agim	Filozofi	32
+Galileoooo	Galileu	julio	Fisikant	67
+silvana	Mehmetai	Zenel	Robotike	33
+silvan	Mehmetaj	Zene	Robotike	4
+Galileo	Galileu	sde	Fisikant	53
+Albanaaaaa	Sufaj	Fadil	Informatike	68
+arben	Sufaj	Fadil	Biologji	9
+Albana	Sufaj	Fadiliii	Informatike	2
+Albanaa1	Sufaj	Fadil	Informatike	69
+we	dddd	Fadil	Biologji	70
+Albana	Sufajjj	Fadil	Informatike	55
+sila	Mehmetaj	Zenel	Robotik	40
+Albana	Sufa	Fadi	Informatik	44
+arben	Sufaj	Fadil	Biologji	36
+we	Sufaj	23232	Biologji	71
+ar	afaf	afa	afaf	72
+Albana	Sufaj	Fadil	Informatike	35
+Mirsada	Kukaj	Agim	Filozofi	41
+Albanaa1	Sufaj	Fadil	Informatike	17
+Millosh	Nikolla	Gjergj	Poet	38
+silva	Mehmetai	Zenel	Robotike	42
+Albana	sufaj	Fadil	Informatike	124
+arb	Sufaj	Fadil	Biologji	88
+arbeniii	Sufaj	Fadil	Biologji	45
+Albanaaaaa	Sufaj	Fadil	Informatike	125
+Mirsad	Kukaj	Agim	Filozofi	16
+asfggsg	Sufaj	Fadil	Biologji	89
+or	Pamuk	H....	Writer	19
+Franc	kafka	H	Filozof	126
+Galileoooo	Galileu	julio	Fisikante	73
+Al	Ali	genti	genti	75
+drhyh	fdhdh	dshdhf	dfhdfh	76
+Fran	kafk	H…	Filozof,Write	15
+gentjan	bbb	fdhfdh	ddd	48
+Gal	uj	fhfdh	Fisikant	57
+fgjhgkj	Sufaj	Fadil	Biologji	90
+uuuuiiiii	Galileu	julio	Fisikant	74
+afaag	Ali	genti	genti	56
+Mirsad	Kukaj	Agim	Filozof	43
+Nikolai	Gogol	P...	Writer,phylosoph	37
+wedyeyety	Sufaj	Fadil	Biologji	59
+Gali	Galileu	ju	Fisika	50
+ew	wqtqw	qwtqt	qtq	58
+Reme	Mehmetaj	Brahim	Ekonomy	23
+Millos	Nikoll	Gjergj	Poet	13
+silvana	Mehmetai	Zenel	Robotike	27
+Mirsa	Kukaj	Agim	Filozof	26
+Albana	Mehmetaj	Fadil	Informatike	92
+Alban	Sufaj	Fadil	Informatike	91
+Galileo	Galileooo	M	Fisikant	49
+Albana	sufaj	oiy	Informatik	94
+Brikena	Dankshi	Musa	Informatike	101
+Alba	Sufaj	Fadil	Informatike	6
+Albana	sufaj	fadil	Informatike	102
+Galileoooo	Galileu	julio	Fisikant	103
+Albanaaaaa	Sufaj	Fadil	Informatike	104
+Albana	Sufaj	Fadil	Informatike	105
+Franc	kafka	h	FilozofWriter	106
+Albana	Sufajadadf	Fadil	Informatike	97
+Albana	sufaj	Fadil	Informatike	108
+Albanaaaaa	suf	Fadil	Informatike	109
+Albana	Sufaj	Fadil	Informatike	111
+Franc	kafka	H	Filozof	112
+Arben	Sufaj	Fadil	Biologji	113
+Galileo	Galileu	oooooooooooo	Fisikant	114
+gentjan	bbb	ccc	ddd	115
+Erion	Deliu	Haker	Informatike	127
+Gentjan	Mehmetaj	Zenel	Inormatike	107
+Albanaaa	Sufaj	Fadil	Informatike	110
+Albana	suf	Fadil	Informatike	128
+Meco	Dine	H	Informatike	129
+Albana	sufaj	Fadil	Informatike	130
+Albanaaaaa	Sufaj	Fadil	Informatike	131
+Franc	kafka	H	Filozof	132
+Meco	Dine	gali	Informatike	123
+\.
+
+
+--
+-- TOC entry 2832 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: login_id_user_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.login_id_user_seq', 1, true);
+
+
+--
+-- TOC entry 2833 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: student_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.student_id_seq', 132, true);
+
+
+--
+-- TOC entry 2698 (class 2606 OID 41100)
+-- Name: login login_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.login
+    ADD CONSTRAINT login_pkey PRIMARY KEY (id_user);
+
+
+--
+-- TOC entry 2696 (class 2606 OID 24719)
+-- Name: student student_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.student
+    ADD CONSTRAINT student_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2019-05-03 22:10:46
+
+--
+-- PostgreSQL database dump complete
+--
+
